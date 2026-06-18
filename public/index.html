@@ -1,0 +1,987 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ملاعبنا - احجز ملعبك دلوقتي</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #0f1117;
+        color: #f0f0f0;
+      }
+
+      /* ===== NAVBAR ===== */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 60px;
+        background: #161820;
+        border-bottom: 1px solid #2a2d3a;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .logo {
+        font-size: 22px;
+        font-weight: 700;
+        color: #4ade80;
+      }
+      .logo span {
+        color: #fff;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 32px;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: #aaa;
+        font-size: 15px;
+        transition: color 0.2s;
+      }
+      nav ul li a:hover {
+        color: #4ade80;
+      }
+      .nav-btns {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .btn-outline {
+        padding: 8px 20px;
+        border: 1px solid #4ade80;
+        color: #4ade80;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 14px;
+        transition: all 0.2s;
+      }
+      .btn-outline:hover {
+        background: #4ade8020;
+      }
+      .btn-green {
+        padding: 8px 20px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+      .btn-green:hover {
+        background: #22c55e;
+      }
+      .user-chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #1e2030;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .user-chip:hover {
+        background: #2a2d3a;
+      }
+
+      /* ===== HERO ===== */
+      .hero {
+        text-align: center;
+        padding: 100px 20px 80px;
+        background: radial-gradient(
+          ellipse at center top,
+          #1a2e1a 0%,
+          #0f1117 60%
+        );
+      }
+      .hero-badge {
+        display: inline-block;
+        background: #4ade8015;
+        border: 1px solid #4ade8040;
+        color: #4ade80;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 13px;
+        margin-bottom: 24px;
+      }
+      .hero h1 {
+        font-size: 52px;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 20px;
+      }
+      .hero h1 span {
+        color: #4ade80;
+      }
+      .hero p {
+        font-size: 18px;
+        color: #888;
+        max-width: 500px;
+        margin: 0 auto 40px;
+        line-height: 1.7;
+      }
+      .hero-btns {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+      }
+      .btn-big {
+        padding: 14px 36px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: none;
+      }
+      .btn-big.green {
+        background: #4ade80;
+        color: #0f1117;
+      }
+      .btn-big.green:hover {
+        background: #22c55e;
+        transform: translateY(-2px);
+      }
+      .btn-big.outline {
+        background: transparent;
+        color: #fff;
+        border: 1px solid #333;
+      }
+      .btn-big.outline:hover {
+        border-color: #4ade80;
+        color: #4ade80;
+      }
+
+      /* ===== FIELDS ===== */
+      .fields-section {
+        padding: 80px 60px;
+      }
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+      }
+      .section-header h2 {
+        font-size: 28px;
+        font-weight: 700;
+      }
+      .fields-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .field-card {
+        background: #161820;
+        border: 1px solid #2a2d3a;
+        border-radius: 14px;
+        overflow: hidden;
+        transition:
+          transform 0.2s,
+          border-color 0.2s;
+      }
+      .field-card:hover {
+        transform: translateY(-4px);
+        border-color: #4ade8060;
+      }
+      .field-img {
+        width: 100%;
+        height: 180px;
+        background: linear-gradient(135deg, #1a3a1a, #0d2210);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 60px;
+      }
+      .field-info {
+        padding: 20px;
+      }
+      .field-info h3 {
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .field-meta {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 14px;
+        flex-wrap: wrap;
+      }
+      .tag {
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        background: #1e2030;
+        color: #888;
+      }
+      .tag.green {
+        background: #4ade8015;
+        color: #4ade80;
+      }
+      .field-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .price {
+        font-size: 18px;
+        font-weight: 700;
+        color: #4ade80;
+      }
+      .price span {
+        font-size: 12px;
+        color: #666;
+        font-weight: 400;
+      }
+      .map-link {
+        font-size: 12px;
+        color: #4ade80;
+        text-decoration: none;
+      }
+      .btn-book {
+        width: 100%;
+        margin-top: 14px;
+        padding: 10px;
+        background: #4ade8015;
+        color: #4ade80;
+        border: 1px solid #4ade8040;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+      .btn-book:hover {
+        background: #4ade80;
+        color: #0f1117;
+      }
+
+      .loading-msg,
+      .error-msg,
+      .empty-msg {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+        grid-column: 1 / -1;
+      }
+      .error-msg {
+        color: #f87171;
+      }
+
+      footer {
+        text-align: center;
+        padding: 30px;
+        border-top: 1px solid #1e2030;
+        color: #444;
+        font-size: 13px;
+      }
+
+      /* ===== MODAL ===== */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        z-index: 999;
+        align-items: center;
+        justify-content: center;
+      }
+      .modal-overlay.active {
+        display: flex;
+      }
+      .modal {
+        background: #161820;
+        border: 1px solid #2a2d3a;
+        border-radius: 18px;
+        padding: 36px;
+        width: 440px;
+        max-width: 95vw;
+        position: relative;
+        animation: slideUp 0.25s ease;
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .modal-close {
+        position: absolute;
+        top: 16px;
+        left: 16px;
+        background: none;
+        border: none;
+        color: #666;
+        font-size: 22px;
+        cursor: pointer;
+      }
+      .modal-close:hover {
+        color: #fff;
+      }
+      .modal h2 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .modal-field-name {
+        color: #4ade80;
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+      .form-group {
+        margin-bottom: 18px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 13px;
+        color: #888;
+        margin-bottom: 8px;
+      }
+      .form-group input {
+        width: 100%;
+        padding: 11px 14px;
+        background: #0f1117;
+        border: 1px solid #2a2d3a;
+        border-radius: 8px;
+        color: #f0f0f0;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+        font-family: inherit;
+      }
+      .form-group input:focus {
+        border-color: #4ade80;
+      }
+      .time-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+      .time-slot {
+        padding: 8px;
+        text-align: center;
+        border-radius: 8px;
+        border: 1px solid #2a2d3a;
+        background: #0f1117;
+        cursor: pointer;
+        font-size: 13px;
+        color: #888;
+        transition: all 0.2s;
+      }
+      .time-slot:hover {
+        border-color: #4ade80;
+        color: #4ade80;
+      }
+      .time-slot.selected {
+        background: #4ade80;
+        color: #0f1117;
+        border-color: #4ade80;
+        font-weight: 600;
+      }
+      .modal-summary {
+        background: #0f1117;
+        border: 1px solid #2a2d3a;
+        border-radius: 10px;
+        padding: 14px 16px;
+        margin: 20px 0;
+        font-size: 13px;
+        color: #888;
+        line-height: 2;
+      }
+      .modal-summary strong {
+        color: #f0f0f0;
+      }
+      .btn-confirm {
+        width: 100%;
+        padding: 13px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .btn-confirm:hover:not(:disabled) {
+        background: #22c55e;
+      }
+      .btn-confirm:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .form-error {
+        color: #f87171;
+        font-size: 13px;
+        margin-bottom: 14px;
+        display: none;
+      }
+
+      /* ===== LOGIN MODAL ===== */
+      .login-tabs {
+        display: flex;
+        margin-bottom: 24px;
+        border-bottom: 1px solid #2a2d3a;
+      }
+      .login-tab {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        font-size: 14px;
+        color: #666;
+        border: none;
+        border-bottom: 2px solid transparent;
+        background: none;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+      .login-tab.active {
+        color: #4ade80;
+        border-bottom-color: #4ade80;
+      }
+
+      /* ===== TOAST ===== */
+      .toast {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #4ade80;
+        color: #0f1117;
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 15px;
+        z-index: 9999;
+      }
+      .toast.show {
+        display: block;
+        animation: fadeUp 0.3s ease;
+      }
+      .toast.red {
+        background: #f87171;
+        color: #fff;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <div class="logo">⚽ ملاعب<span>نا</span></div>
+      <ul>
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="bookings.html">حجوزاتي</a></li>
+        <li><a href="ratings.html">التقييمات</a></li>
+      </ul>
+      <div class="nav-btns" id="navBtns"></div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-badge">🏆 أكبر منصة حجز ملاعب في مصر</div>
+      <h1>احجز ملعبك<br /><span>في ثوانٍ</span></h1>
+      <p>احجز ملعبك من البيت وقيّم اللاعبين بعد المباراة</p>
+      <div class="hero-btns">
+        <button class="btn-big green" onclick="scrollToFields()">
+          احجز دلوقتي
+        </button>
+      </div>
+    </section>
+
+    <!-- FIELDS -->
+    <section class="fields-section" id="fields-section">
+      <div class="section-header">
+        <h2>الملاعب المتاحة</h2>
+      </div>
+      <div class="fields-grid" id="fieldsGrid">
+        <div class="loading-msg">⏳ جاري تحميل الملاعب...</div>
+      </div>
+    </section>
+
+    <footer><p>© 2026 ملاعبنا — جميع الحقوق محفوظة</p></footer>
+
+    <!-- BOOKING MODAL -->
+    <div class="modal-overlay" id="bookingModal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeBooking()">✕</button>
+        <h2>📅 احجز ملعبك</h2>
+        <div class="modal-field-name" id="modalFieldName"></div>
+        <div class="form-error" id="bookingError"></div>
+
+        <div class="form-group">
+          <label>اختار التاريخ</label>
+          <input type="date" id="bookingDate" />
+        </div>
+        <div class="form-group">
+          <label>اختار الوقت</label>
+          <div class="time-grid" id="timeGrid"></div>
+        </div>
+        <div class="modal-summary" id="bookingSummary" style="display: none">
+          📍 الملعب: <strong id="sumField"></strong><br />
+          📅 التاريخ: <strong id="sumDate"></strong><br />
+          🕐 الوقت: <strong id="sumTime"></strong><br />
+          💰 السعر: <strong id="sumPrice"></strong>
+        </div>
+        <button
+          class="btn-confirm"
+          id="confirmBtn"
+          onclick="confirmBooking()"
+          disabled
+        >
+          تأكيد الحجز
+        </button>
+      </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div class="modal-overlay" id="loginModal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeLogin()">✕</button>
+        <div class="login-tabs">
+          <button class="login-tab active" onclick="switchTab('login')">
+            تسجيل دخول
+          </button>
+          <button class="login-tab" onclick="switchTab('register')">
+            إنشاء حساب
+          </button>
+        </div>
+        <div class="form-error" id="authError"></div>
+
+        <div id="loginForm">
+          <div class="form-group">
+            <label>البريد الإلكتروني</label
+            ><input
+              type="email"
+              id="loginEmail"
+              placeholder="example@email.com"
+            />
+          </div>
+          <div class="form-group">
+            <label>كلمة المرور</label
+            ><input type="password" id="loginPassword" placeholder="••••••••" />
+          </div>
+          <button class="btn-confirm" onclick="doLogin()">دخول</button>
+        </div>
+
+        <div id="registerForm" style="display: none">
+          <div class="form-group">
+            <label>الاسم</label
+            ><input type="text" id="registerName" placeholder="اسمك الكامل" />
+          </div>
+          <div class="form-group">
+            <label>البريد الإلكتروني</label
+            ><input
+              type="email"
+              id="registerEmail"
+              placeholder="example@email.com"
+            />
+          </div>
+          <div class="form-group">
+            <label>كلمة المرور</label
+            ><input
+              type="password"
+              id="registerPassword"
+              placeholder="••••••••"
+            />
+          </div>
+          <button class="btn-confirm" onclick="doRegister()">
+            إنشاء الحساب
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+      
+      // ⚠️ غيّر الرابط ده لما تنشر الباك إند على Railway
+      const API_URL = "http://localhost:3000/api";
+
+      let fields = [];
+      let selectedTime = null;
+      let currentField = null;
+
+      const allSlots = [
+        "08:00",
+        "09:00",
+        "10:00",
+        "11:00",
+        "12:00",
+        "13:00",
+        "14:00",
+        "15:00",
+        "16:00",
+        "17:00",
+        "18:00",
+        "19:00",
+        "20:00",
+        "21:00",
+      ];
+
+      // ============================================
+      // إدارة تسجيل الدخول (Token في localStorage)
+      // ============================================
+      function getToken() {
+        return localStorage.getItem("token");
+      }
+      function getUser() {
+        const u = localStorage.getItem("user");
+        return u ? JSON.parse(u) : null;
+      }
+      function saveAuth(token, user) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify(user));
+      }
+      function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        renderNav();
+        showToast("👋 تم تسجيل الخروج", false);
+      }
+
+      function renderNav() {
+        const user = getUser();
+        const navBtns = document.getElementById("navBtns");
+        if (user) {
+          navBtns.innerHTML = `
+          <div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>
+        `;
+        } else {
+          navBtns.innerHTML = `
+          <button class="btn-outline" onclick="openLogin()">تسجيل دخول</button>
+          <button class="btn-green" onclick="openLogin()">إنشاء حساب</button>
+        `;
+        }
+      }
+
+      // ============================================
+      // جلب الملاعب من الباك إند
+      // ============================================
+      async function loadFields() {
+        const grid = document.getElementById("fieldsGrid");
+        try {
+          const res = await fetch(`${API_URL}/bookings/fields`);
+          if (!res.ok) throw new Error("فشل تحميل الملاعب");
+          fields = await res.json();
+
+          if (!fields.length) {
+            grid.innerHTML =
+              '<div class="empty-msg">مفيش ملاعب متاحة دلوقتي</div>';
+            return;
+          }
+
+          grid.innerHTML = fields
+            .map(
+              (f) => `
+          <div class="field-card">
+            <div class="field-img">${f.emoji}</div>
+            <div class="field-info">
+              <h3>${f.name} - ${f.location}</h3>
+              <div class="field-meta">
+                <span class="tag green">متاح</span>
+                <span class="tag">${f.type}</span>
+                <span class="tag">${f.surface}</span>
+              </div>
+              <div class="field-footer">
+                <div class="price">${f.price} جنيه <span>/ ساعة</span></div>
+                ${f.mapUrl ? `<a class="map-link" href="${f.mapUrl}" target="_blank">📍 الموقع على الماب</a>` : ""}
+              </div>
+              <button class="btn-book" onclick="openBooking(${f.id})">احجز الآن</button>
+            </div>
+          </div>
+        `,
+            )
+            .join("");
+        } catch (err) {
+          console.error(err);
+          grid.innerHTML =
+            '<div class="error-msg">❌ مش قادر أوصل للسيرفر. تأكد إن الباك إند شغال.</div>';
+        }
+      }
+
+      function scrollToFields() {
+        document
+          .getElementById("fields-section")
+          .scrollIntoView({ behavior: "smooth" });
+      }
+
+      // ============================================
+      // نافذة الحجز
+      // ============================================
+      function openBooking(fieldId) {
+        if (!getToken()) {
+          showToast("⚠️ سجّل دخول الأول عشان تحجز", true);
+          openLogin();
+          return;
+        }
+
+        currentField = fields.find((f) => f.id === fieldId);
+        selectedTime = null;
+
+        document.getElementById("modalFieldName").textContent =
+          "📍 " + currentField.name + " - " + currentField.location;
+        document.getElementById("bookingSummary").style.display = "none";
+        document.getElementById("bookingError").style.display = "none";
+        document.getElementById("confirmBtn").disabled = true;
+
+        buildTimeGrid();
+        document.getElementById("bookingModal").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeBooking() {
+        document.getElementById("bookingModal").classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      function buildTimeGrid() {
+        const grid = document.getElementById("timeGrid");
+        grid.innerHTML = allSlots
+          .map(
+            (slot) =>
+              `<div class="time-slot" onclick="selectTime('${slot}', this)">${slot}</div>`,
+          )
+          .join("");
+      }
+
+      function selectTime(slot, el) {
+        document
+          .querySelectorAll(".time-slot")
+          .forEach((s) => s.classList.remove("selected"));
+        el.classList.add("selected");
+        selectedTime = slot;
+        updateSummary();
+      }
+
+      function updateSummary() {
+        if (!selectedTime || !currentField) return;
+        const dateVal = document.getElementById("bookingDate").value;
+        const dateFormatted = new Date(
+          dateVal + "T00:00:00",
+        ).toLocaleDateString("ar-EG", {
+          weekday: "long",
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+
+        document.getElementById("sumField").textContent = currentField.name;
+        document.getElementById("sumDate").textContent = dateFormatted;
+        document.getElementById("sumTime").textContent = selectedTime;
+        document.getElementById("sumPrice").textContent =
+          currentField.price + " جنيه";
+        document.getElementById("bookingSummary").style.display = "block";
+        document.getElementById("confirmBtn").disabled = false;
+      }
+
+      document.getElementById("bookingDate").addEventListener("change", () => {
+        if (selectedTime) updateSummary();
+      });
+
+      // ============================================
+      // تأكيد الحجز — بيبعت طلب حقيقي للباك إند
+      // ============================================
+      async function confirmBooking() {
+        const errEl = document.getElementById("bookingError");
+        errEl.style.display = "none";
+
+        try {
+          const res = await fetch(`${API_URL}/bookings`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + getToken(),
+            },
+            body: JSON.stringify({
+              fieldId: currentField.id,
+              date: document.getElementById("bookingDate").value,
+              time: selectedTime,
+              duration: 1,
+              price: currentField.price,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            errEl.textContent = "⚠️ " + (data.error || "حصل خطأ");
+            errEl.style.display = "block";
+            return;
+          }
+
+          closeBooking();
+          showToast(
+            "✅ تم الحجز بنجاح! موعدك " +
+              selectedTime +
+              " في " +
+              currentField.name,
+            false,
+          );
+        } catch (err) {
+          errEl.textContent = "❌ مش قادر أوصل للسيرفر";
+          errEl.style.display = "block";
+        }
+      }
+
+      // ============================================
+      // تسجيل الدخول والحساب الجديد
+      // ============================================
+      function openLogin() {
+        document.getElementById("authError").style.display = "none";
+        document.getElementById("loginModal").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+      function closeLogin() {
+        document.getElementById("loginModal").classList.remove("active");
+        document.body.style.overflow = "";
+      }
+      function switchTab(tab) {
+        document.querySelectorAll(".login-tab").forEach((t, i) => {
+          t.classList.toggle(
+            "active",
+            (tab === "login" && i === 0) || (tab === "register" && i === 1),
+          );
+        });
+        document.getElementById("loginForm").style.display =
+          tab === "login" ? "block" : "none";
+        document.getElementById("registerForm").style.display =
+          tab === "register" ? "block" : "none";
+        document.getElementById("authError").style.display = "none";
+      }
+
+      async function doRegister() {
+        const errEl = document.getElementById("authError");
+        const name = document.getElementById("registerName").value.trim();
+        const email = document.getElementById("registerEmail").value.trim();
+        const password = document.getElementById("registerPassword").value;
+
+        if (!name || !email || !password) {
+          errEl.textContent = "⚠️ كل الحقول مطلوبة";
+          errEl.style.display = "block";
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API_URL}/auth/register`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, password }),
+          });
+          const data = await res.json();
+
+          if (!res.ok) {
+            errEl.textContent = "⚠️ " + (data.error || "حصل خطأ");
+            errEl.style.display = "block";
+            return;
+          }
+
+          showToast("✅ تم إنشاء الحساب! دلوقتي سجّل دخول", false);
+          switchTab("login");
+        } catch {
+          errEl.textContent = "❌ مش قادر أوصل للسيرفر";
+          errEl.style.display = "block";
+        }
+      }
+
+      async function doLogin() {
+        const errEl = document.getElementById("authError");
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+
+        if (!email || !password) {
+          errEl.textContent = "⚠️ كل الحقول مطلوبة";
+          errEl.style.display = "block";
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API_URL}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await res.json();
+
+          if (!res.ok) {
+            errEl.textContent = "⚠️ " + (data.error || "حصل خطأ");
+            errEl.style.display = "block";
+            return;
+          }
+
+          saveAuth(data.token, data.user);
+          renderNav();
+          closeLogin();
+          showToast("👋 أهلاً " + data.user.name + "!", false);
+        } catch {
+          errEl.textContent = "❌ مش قادر أوصل للسيرفر";
+          errEl.style.display = "block";
+        }
+      }
+
+      // ============================================
+      // Toast
+      // ============================================
+      function showToast(msg, isRed) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.className = "toast show" + (isRed ? " red" : "");
+        setTimeout(() => t.classList.remove("show"), 4000);
+      }
+
+      // ============================================
+      // إغلاق المودال بالضغط بره
+      // ============================================
+      document
+        .getElementById("bookingModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeBooking();
+        });
+      document
+        .getElementById("loginModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeLogin();
+        });
+
+      // ============================================
+      // Init
+      // ============================================
+      window.addEventListener("load", () => {
+        const today = new Date().toISOString().split("T")[0];
+        document.getElementById("bookingDate").min = today;
+        document.getElementById("bookingDate").value = today;
+        renderNav();
+        loadFields();
+      });
+    </script>
+  </body>
+</html>

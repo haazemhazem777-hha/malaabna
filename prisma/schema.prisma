@@ -1,0 +1,69 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")  
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String    @unique
+  age       Int?
+  password  String
+  createdAt DateTime  @default(now())
+
+  bookings        Booking[]
+  ratingsGiven    Rating[] @relation("RaterRelation")
+  ratingsReceived Rating[] @relation("RatedRelation")
+}
+
+model Field {
+  id       Int       @id @default(autoincrement())
+  name     String
+  location String
+  type     String
+  surface  String
+  price    Int
+  emoji    String    @default("🏟️")
+  mapUrl   String?
+
+  bookings Booking[]
+}
+
+model Booking {
+  id        Int      @id @default(autoincrement())
+  date      String
+  time      String
+  duration  Int      @default(1)
+  price     Int
+  status    String   @default("upcoming")
+  createdAt DateTime @default(now())
+
+  userId  Int
+  user    User    @relation(fields: [userId], references: [id])
+
+  fieldId Int
+  field   Field   @relation(fields: [fieldId], references: [id])
+
+  ratings Rating[]
+}
+
+model Rating {
+  id        Int      @id @default(autoincrement())
+  stars     Int
+  comment   String?
+  skills    String[]
+  createdAt DateTime @default(now())
+
+  raterId Int
+  rater   User @relation("RaterRelation", fields: [raterId], references: [id])
+
+  ratedId Int
+  rated   User @relation("RatedRelation", fields: [ratedId], references: [id])
+
+  bookingId Int
+  booking   Booking @relation(fields: [bookingId], references: [id])
+}

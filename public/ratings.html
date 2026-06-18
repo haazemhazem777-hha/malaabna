@@ -1,0 +1,703 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ملاعبنا - التقييمات</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #0f1117;
+        color: #f0f0f0;
+      }
+
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 60px;
+        background: #161820;
+        border-bottom: 1px solid #2a2d3a;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+      .logo {
+        font-size: 22px;
+        font-weight: 700;
+        color: #4ade80;
+        text-decoration: none;
+      }
+      .logo span {
+        color: #fff;
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 32px;
+      }
+      nav ul li a {
+        text-decoration: none;
+        color: #aaa;
+        font-size: 15px;
+        transition: color 0.2s;
+      }
+      nav ul li a:hover,
+      nav ul li a.active {
+        color: #4ade80;
+      }
+      .nav-btns {
+        display: flex;
+        gap: 12px;
+        align-items: center;
+      }
+      .btn-outline {
+        padding: 8px 20px;
+        border: 1px solid #4ade80;
+        color: #4ade80;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 14px;
+      }
+      .btn-green {
+        padding: 8px 20px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .user-chip {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #1e2030;
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+      .user-chip:hover {
+        background: #2a2d3a;
+      }
+
+      .page-header {
+        padding: 60px 60px 40px;
+        background: radial-gradient(
+          ellipse at center top,
+          #1a2e1a 0%,
+          #0f1117 70%
+        );
+        text-align: center;
+      }
+      .page-header h1 {
+        font-size: 38px;
+        font-weight: 800;
+        margin-bottom: 10px;
+      }
+      .page-header h1 span {
+        color: #4ade80;
+      }
+      .page-header p {
+        color: #666;
+        font-size: 16px;
+      }
+
+      .match-selector {
+        padding: 30px 60px;
+        background: #12141c;
+        border-bottom: 1px solid #1e2030;
+      }
+      .match-selector h3 {
+        font-size: 16px;
+        color: #888;
+        margin-bottom: 16px;
+      }
+      .matches-row {
+        display: flex;
+        gap: 14px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+      .match-card {
+        min-width: 220px;
+        padding: 16px 20px;
+        background: #161820;
+        border: 1px solid #2a2d3a;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+      .match-card:hover {
+        border-color: #4ade8060;
+      }
+      .match-card.active {
+        border-color: #4ade80;
+        background: #4ade8010;
+      }
+      .match-card .match-date {
+        font-size: 11px;
+        color: #666;
+        margin-bottom: 6px;
+      }
+      .match-card .match-name {
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .match-card .match-field {
+        font-size: 12px;
+        color: #4ade80;
+      }
+      .match-card .match-rated {
+        display: inline-block;
+        margin-top: 8px;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 4px;
+      }
+      .match-card .match-rated.done {
+        background: #4ade8015;
+        color: #4ade80;
+      }
+      .match-card .match-rated.pending {
+        background: #f59e0b15;
+        color: #f59e0b;
+      }
+
+      .main {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 40px 60px;
+      }
+
+      .players-section h2 {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 24px;
+      }
+
+      .player-card {
+        background: #161820;
+        border: 1px solid #2a2d3a;
+        border-radius: 14px;
+        padding: 22px;
+        margin-bottom: 16px;
+        transition: border-color 0.2s;
+      }
+      .player-card.rated {
+        border-color: #4ade8040;
+      }
+
+      .player-top {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: 18px;
+      }
+      .player-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+        font-weight: 700;
+        flex-shrink: 0;
+        background: #4ade8020;
+      }
+      .player-info {
+        flex: 1;
+      }
+      .player-info h3 {
+        font-size: 16px;
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .player-badge {
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-weight: 600;
+      }
+      .badge-rated {
+        background: #4ade8015;
+        color: #4ade80;
+      }
+      .badge-pending {
+        background: #f59e0b15;
+        color: #f59e0b;
+      }
+
+      .rating-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+      .rating-label {
+        font-size: 13px;
+        color: #888;
+      }
+      .stars-input {
+        display: flex;
+        gap: 4px;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      }
+      .stars-input input {
+        display: none;
+      }
+      .stars-input label {
+        font-size: 24px;
+        cursor: pointer;
+        color: #2a2d3a;
+        transition: color 0.15s;
+        line-height: 1;
+      }
+      .stars-input label:hover,
+      .stars-input label:hover ~ label,
+      .stars-input input:checked ~ label {
+        color: #f59e0b;
+      }
+
+      .comment-box {
+        width: 100%;
+        padding: 10px 14px;
+        background: #0f1117;
+        border: 1px solid #2a2d3a;
+        border-radius: 8px;
+        color: #f0f0f0;
+        font-size: 13px;
+        resize: none;
+        outline: none;
+        font-family: inherit;
+        transition: border-color 0.2s;
+        margin-bottom: 14px;
+      }
+      .comment-box:focus {
+        border-color: #4ade80;
+      }
+
+      .btn-rate {
+        padding: 9px 22px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .btn-rate:hover {
+        background: #22c55e;
+      }
+
+      .skills-row {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+      .skill-tag {
+        font-size: 12px;
+        padding: 5px 12px;
+        border-radius: 20px;
+        border: 1px solid #2a2d3a;
+        color: #888;
+        cursor: pointer;
+        transition: all 0.2s;
+        background: #0f1117;
+      }
+      .skill-tag:hover {
+        border-color: #4ade80;
+        color: #4ade80;
+      }
+      .skill-tag.selected {
+        background: #4ade8015;
+        border-color: #4ade80;
+        color: #4ade80;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 60px 20px;
+        color: #444;
+      }
+      .empty-state div {
+        font-size: 48px;
+        margin-bottom: 16px;
+      }
+      .empty-state p {
+        font-size: 15px;
+        margin-bottom: 20px;
+      }
+      .empty-state button {
+        padding: 10px 24px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .error-msg {
+        text-align: center;
+        padding: 40px;
+        color: #f87171;
+      }
+      .loading-msg {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+      }
+
+      .toast {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #4ade80;
+        color: #0f1117;
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 15px;
+        z-index: 9999;
+      }
+      .toast.show {
+        display: block;
+        animation: fadeUp 0.3s ease;
+      }
+      .toast.red {
+        background: #f87171;
+        color: #fff;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="logo" href="index.html">⚽ ملاعب<span>نا</span></a>
+      <ul>
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="bookings.html">حجوزاتي</a></li>
+        <li><a href="ratings.html" class="active">التقييمات</a></li>
+      </ul>
+      <div class="nav-btns" id="navBtns"></div>
+    </nav>
+
+    <div class="page-header">
+      <h1>قيّم <span>زملاءك</span> بعد المباراة</h1>
+      <p>تقييمك بيساعد اللاعبين يتطوروا ويبنوا سمعتهم على المنصة</p>
+    </div>
+
+    <div class="match-selector">
+      <h3>اختار المباراة اللي عايز تقيّم فيها</h3>
+      <div class="matches-row" id="matchesRow">
+        <div class="loading-msg">⏳</div>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="players-section">
+        <h2 id="playersTitle">لاعبو المباراة</h2>
+        <div id="playersList"></div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+      // ⚠️ غيّر الرابط ده لما تنشر الباك إند على Railway
+      const API_URL = "http://localhost:3000/api";
+
+      let matches = [];
+      let activeMatch = null;
+      const skillsList = [
+        "سرعة",
+        "تمرير",
+        "تسديد",
+        "دفاع",
+        "روح الفريق",
+        "قيادة",
+      ];
+
+      function getToken() {
+        return localStorage.getItem("token");
+      }
+      function getUser() {
+        const u = localStorage.getItem("user");
+        return u ? JSON.parse(u) : null;
+      }
+      function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location = "index.html";
+      }
+
+      function renderNav() {
+        const user = getUser();
+        const navBtns = document.getElementById("navBtns");
+        if (user) {
+          navBtns.innerHTML = `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`;
+        } else {
+          navBtns.innerHTML = `
+          <button class="btn-outline" onclick="window.location='index.html'">تسجيل دخول</button>
+          <button class="btn-green" onclick="window.location='index.html'">إنشاء حساب</button>
+        `;
+        }
+      }
+
+      // ============================================
+      // جلب المباريات
+      // ============================================
+      async function loadMatches() {
+        const row = document.getElementById("matchesRow");
+
+        if (!getToken()) {
+          row.innerHTML = "";
+          document.getElementById("playersList").innerHTML = `
+          <div class="empty-state">
+            <div>🔒</div>
+            <p>لازم تسجل دخول الأول عشان تقيّم زملاءك</p>
+            <button onclick="window.location='index.html'">سجّل دخول</button>
+          </div>`;
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API_URL}/ratings/matches/mine`, {
+            headers: { Authorization: "Bearer " + getToken() },
+          });
+
+          if (res.status === 401) {
+            logout();
+            return;
+          }
+          if (!res.ok) throw new Error("فشل تحميل المباريات");
+
+          matches = await res.json();
+
+          if (!matches.length) {
+            row.innerHTML = "";
+            document.getElementById("playersList").innerHTML = `
+            <div class="empty-state">
+              <div>⚽</div>
+              <p>مفيش مباريات منتهية لسه عشان تقيّم فيها</p>
+              <button onclick="window.location='index.html'">احجز ملعب</button>
+            </div>`;
+            return;
+          }
+
+          renderMatches();
+          activeMatch = matches[0].bookingId;
+          renderMatches();
+          renderPlayers();
+        } catch (err) {
+          console.error(err);
+          row.innerHTML =
+            '<div class="error-msg">❌ مش قادر أوصل للسيرفر</div>';
+        }
+      }
+
+      const monthsAr = [
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر",
+      ];
+
+      function renderMatches() {
+        const row = document.getElementById("matchesRow");
+        row.innerHTML = matches
+          .map((m) => {
+            const d = new Date(m.date + "T00:00:00");
+            const dateStr = `${d.getDate()} ${monthsAr[d.getMonth()]}`;
+            return `
+          <div class="match-card ${m.bookingId === activeMatch ? "active" : ""}" onclick="selectMatch(${m.bookingId})">
+            <div class="match-date">${dateStr} — ${m.time}</div>
+            <div class="match-name">${m.field.emoji} ${m.field.name}</div>
+            <div class="match-field">📍 ${m.field.location}</div>
+            <span class="match-rated ${m.rated ? "done" : "pending"}">
+              ${m.rated ? "✅ تم التقييم" : "⏳ لم يتم التقييم"}
+            </span>
+          </div>`;
+          })
+          .join("");
+      }
+
+      function selectMatch(bookingId) {
+        activeMatch = bookingId;
+        renderMatches();
+        renderPlayers();
+      }
+
+      // ============================================
+      // عرض اللاعبين للمباراة المختارة
+      // ============================================
+      function renderPlayers() {
+        const match = matches.find((m) => m.bookingId === activeMatch);
+        const list = document.getElementById("playersList");
+
+        if (!match) {
+          list.innerHTML = "";
+          return;
+        }
+
+        document.getElementById("playersTitle").textContent =
+          `لاعبو ${match.field.name}`;
+
+        if (!match.players.length) {
+          list.innerHTML = `
+          <div class="empty-state">
+            <div>👤</div>
+            <p>مفيش لاعبين تانيين حجزوا نفس الموعد في المباراة دي</p>
+          </div>`;
+          return;
+        }
+
+        list.innerHTML = match.players
+          .map(
+            (p) => `
+        <div class="player-card" id="card-${p.id}">
+          <div class="player-top">
+            <div class="player-avatar">🧑</div>
+            <div class="player-info"><h3>${p.name}</h3></div>
+            <span class="player-badge badge-pending" id="badge-${p.id}">⏳ في الانتظار</span>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">التقييم العام</span>
+            <div class="stars-input" id="stars-${p.id}">
+              ${[5, 4, 3, 2, 1]
+                .map(
+                  (n) => `
+                <input type="radio" name="star-${p.id}" id="s${p.id}-${n}" value="${n}"/>
+                <label for="s${p.id}-${n}">★</label>
+              `,
+                )
+                .join("")}
+            </div>
+          </div>
+
+          <div class="skills-row" id="skills-${p.id}">
+            ${skillsList.map((s) => `<span class="skill-tag" onclick="toggleSkill(this)">${s}</span>`).join("")}
+          </div>
+
+          <textarea class="comment-box" id="comment-${p.id}" rows="2" placeholder="اكتب تعليق على أدائه... (اختياري)"></textarea>
+
+          <button class="btn-rate" onclick="submitRating(${p.id})">إرسال التقييم</button>
+        </div>
+      `,
+          )
+          .join("");
+      }
+
+      function toggleSkill(el) {
+        el.classList.toggle("selected");
+      }
+
+      // ============================================
+      // إرسال التقييم للباك إند
+      // ============================================
+      async function submitRating(playerId) {
+        const checkedStar = document.querySelector(
+          `input[name="star-${playerId}"]:checked`,
+        );
+        if (!checkedStar) {
+          showToast("⚠️ اختار عدد النجوم الأول!", true);
+          return;
+        }
+        const stars = parseInt(checkedStar.value);
+
+        const skillEls = document.querySelectorAll(
+          `#skills-${playerId} .skill-tag.selected`,
+        );
+        const skills = Array.from(skillEls).map((el) => el.textContent);
+
+        const comment = document
+          .getElementById(`comment-${playerId}`)
+          .value.trim();
+
+        try {
+          const res = await fetch(`${API_URL}/ratings`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + getToken(),
+            },
+            body: JSON.stringify({
+              ratedId: playerId,
+              bookingId: activeMatch,
+              stars,
+              comment,
+              skills,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (!res.ok) {
+            showToast("⚠️ " + (data.error || "حصل خطأ"), true);
+            return;
+          }
+
+          // حدّث الكارت في الواجهة
+          document.getElementById(`card-${playerId}`).classList.add("rated");
+          document.getElementById(`badge-${playerId}`).className =
+            "player-badge badge-rated";
+          document.getElementById(`badge-${playerId}`).textContent =
+            "✅ تم التقييم";
+
+          showToast("✅ تم تقييم اللاعب بنجاح!", false);
+        } catch (err) {
+          showToast("❌ مش قادر أوصل للسيرفر", true);
+        }
+      }
+
+      function showToast(msg, isRed) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.className = "toast show" + (isRed ? " red" : "");
+        setTimeout(() => t.classList.remove("show"), 3500);
+      }
+
+      // ============================================
+      // Init
+      // ============================================
+      renderNav();
+      loadMatches();
+    </script>
+  </body>
+</html>

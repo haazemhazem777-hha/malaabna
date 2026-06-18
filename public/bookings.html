@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ملاعبنا - حجوزاتي</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0f1117; color: #f0f0f0; }
+
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 60px; background: #161820;
+      border-bottom: 1px solid #2a2d3a; position: sticky; top: 0; z-index: 100;
+    }
+    .logo { font-size: 22px; font-weight: 700; color: #4ade80; text-decoration: none; }
+    .logo span { color: #fff; }
+    nav ul { list-style: none; display: flex; gap: 32px; }
+    nav ul li a { text-decoration: none; color: #aaa; font-size: 15px; transition: color 0.2s; }
+    nav ul li a:hover { color: #4ade80; }
+    nav ul li a.active { color: #4ade80; }
+    .nav-btns { display: flex; gap: 12px; align-items: center; }
+    .btn-outline { padding: 8px 20px; border: 1px solid #4ade80; color: #4ade80; border-radius: 8px; background: transparent; cursor: pointer; font-size: 14px; }
+    .btn-green { padding: 8px 20px; background: #4ade80; color: #0f1117; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; }
+    .user-chip { display: flex; align-items: center; gap: 8px; background: #1e2030; padding: 6px 16px; border-radius: 20px; font-size: 14px; cursor: pointer; }
+    .user-chip:hover { background: #2a2d3a; }
+
+    .page-header { padding: 50px 60px 0; background: radial-gradient(ellipse at top right, #1a2e1a 0%, #0f1117 60%); }
+    .page-header h1 { font-size: 34px; font-weight: 800; margin-bottom: 8px; }
+    .page-header h1 span { color: #4ade80; }
+    .page-header p { color: #666; font-size: 15px; margin-bottom: 32px; }
+
+    .summary-row { display: flex; gap: 16px; padding-bottom: 40px; flex-wrap: wrap; }
+    .sum-card { flex: 1; min-width: 140px; background: #161820; border: 1px solid #2a2d3a; border-radius: 12px; padding: 20px 22px; display: flex; align-items: center; gap: 16px; }
+    .sum-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .sum-card .num { font-size: 24px; font-weight: 800; }
+    .sum-card .lbl { font-size: 12px; color: #666; margin-top: 2px; }
+
+    .main { padding: 36px 60px; max-width: 900px; }
+
+    .filters-row { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
+    .filter-btn { padding: 7px 18px; border-radius: 20px; font-size: 13px; border: 1px solid #2a2d3a; background: #0f1117; color: #888; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+    .filter-btn:hover { border-color: #4ade80; color: #4ade80; }
+    .filter-btn.active { background: #4ade8015; border-color: #4ade80; color: #4ade80; font-weight: 600; }
+
+    .booking-card {
+      background: #161820; border: 1px solid #2a2d3a; border-radius: 14px;
+      padding: 22px 24px; margin-bottom: 16px;
+      display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center;
+      transition: border-color 0.2s; position: relative; overflow: hidden;
+    }
+    .booking-card:hover { border-color: #4ade8050; }
+    .booking-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 4px; }
+    .booking-card.upcoming::before { background: #4ade80; }
+    .booking-card.completed::before { background: #3b82f6; }
+    .booking-card.cancelled::before { background: #f87171; }
+
+    .date-block { text-align: center; min-width: 64px; background: #0f1117; border: 1px solid #2a2d3a; border-radius: 10px; padding: 10px 14px; }
+    .date-block .day { font-size: 26px; font-weight: 800; color: #4ade80; line-height: 1; }
+    .date-block .month { font-size: 12px; color: #666; margin-top: 4px; }
+    .date-block .weekday { font-size: 11px; color: #888; margin-top: 2px; }
+
+    .booking-info h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .booking-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
+    .meta-item { display: flex; align-items: center; gap: 5px; font-size: 13px; color: #888; }
+    .booking-tags { display: flex; gap: 8px; flex-wrap: wrap; }
+    .tag { font-size: 11px; padding: 3px 10px; border-radius: 5px; background: #1e2030; color: #888; }
+
+    .booking-actions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
+    .status-badge { font-size: 12px; padding: 5px 12px; border-radius: 6px; font-weight: 600; white-space: nowrap; }
+    .status-upcoming { background: #4ade8015; color: #4ade80; }
+    .status-completed { background: #3b82f615; color: #3b82f6; }
+    .status-cancelled { background: #f8717115; color: #f87171; }
+
+    .action-btn { font-size: 12px; padding: 6px 14px; border-radius: 7px; cursor: pointer; font-family: inherit; transition: all 0.2s; border: 1px solid #2a2d3a; background: transparent; color: #888; }
+    .action-btn:hover { border-color: #4ade80; color: #4ade80; }
+    .action-btn.danger:hover { border-color: #f87171; color: #f87171; }
+    .action-btn.primary { background: #4ade8015; border-color: #4ade8040; color: #4ade80; }
+    .action-btn.primary:hover { background: #4ade80; color: #0f1117; }
+
+    .empty, .loading-msg, .error-msg { text-align: center; padding: 60px 20px; color: #444; }
+    .empty div, .loading-msg { font-size: 48px; margin-bottom: 16px; }
+    .empty p { font-size: 15px; margin-bottom: 20px; }
+    .error-msg { color: #f87171; font-size: 15px; }
+    .empty button { padding: 10px 24px; background: #4ade80; color: #0f1117; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; }
+
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 999; align-items: center; justify-content: center; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: #161820; border: 1px solid #2a2d3a; border-radius: 18px; padding: 36px; width: 400px; max-width: 95vw; position: relative; animation: slideUp 0.25s ease; }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-close { position: absolute; top: 16px; left: 16px; background: none; border: none; color: #666; font-size: 20px; cursor: pointer; }
+    .modal-close:hover { color: #fff; }
+    .modal h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
+    .modal p { color: #888; font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
+    .modal-actions { display: flex; gap: 10px; }
+    .btn-cancel-confirm { flex: 1; padding: 11px; background: #f8717115; color: #f87171; border: 1px solid #f8717140; border-radius: 9px; cursor: pointer; font-size: 14px; font-weight: 600; font-family: inherit; }
+    .btn-cancel-confirm:hover { background: #f87171; color: #fff; }
+    .btn-keep { flex: 1; padding: 11px; background: #4ade80; color: #0f1117; border: none; border-radius: 9px; cursor: pointer; font-size: 14px; font-weight: 700; font-family: inherit; }
+    .btn-keep:hover { background: #22c55e; }
+
+    .toast { display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #4ade80; color: #0f1117; padding: 13px 26px; border-radius: 12px; font-weight: 700; font-size: 14px; z-index: 9999; }
+    .toast.show { display: block; animation: fadeUp 0.3s ease; }
+    .toast.red { background: #f87171; color: #fff; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateX(-50%) translateY(14px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="logo" href="index.html">⚽ ملاعب<span>نا</span></a>
+    <ul>
+      <li><a href="index.html">الرئيسية</a></li>
+      <li><a href="bookings.html" class="active">حجوزاتي</a></li>
+      <li><a href="ratings.html">التقييمات</a></li>
+    </ul>
+    <div class="nav-btns" id="navBtns"></div>
+  </nav>
+
+  <div class="page-header">
+    <h1>حجوزاتي <span>⚽</span></h1>
+    <p>كل حجوزاتك الحقيقية من قاعدة البيانات</p>
+    <div class="summary-row" id="summaryRow"></div>
+  </div>
+
+  <div class="main">
+    <div class="filters-row">
+      <button class="filter-btn active" onclick="setFilter('all', this)">الكل</button>
+      <button class="filter-btn" onclick="setFilter('upcoming', this)">⏳ القادمة</button>
+      <button class="filter-btn" onclick="setFilter('completed', this)">✅ المنتهية</button>
+      <button class="filter-btn" onclick="setFilter('cancelled', this)">❌ الملغية</button>
+    </div>
+    <div id="bookingsList"><div class="loading-msg">⏳</div></div>
+  </div>
+
+  <div class="modal-overlay" id="cancelModal">
+    <div class="modal">
+      <button class="modal-close" onclick="closeCancel()">✕</button>
+      <h2>❌ إلغاء الحجز</h2>
+      <p id="cancelMsg"></p>
+      <div class="modal-actions">
+        <button class="btn-cancel-confirm" onclick="confirmCancel()">نعم، إلغي الحجز</button>
+        <button class="btn-keep" onclick="closeCancel()">لا، احتفظ بيه</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    // ⚠️ غيّر الرابط ده لما تنشر الباك إند على Railway
+    const API_URL = 'http://localhost:3000/api';
+
+    let bookings = [];
+    let activeFilter = 'all';
+    let cancelTargetId = null;
+
+    const monthsAr = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+
+    // ============================================
+    // المصادقة
+    // ============================================
+    function getToken() { return localStorage.getItem('token'); }
+    function getUser() {
+      const u = localStorage.getItem('user');
+      return u ? JSON.parse(u) : null;
+    }
+    function logout() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location = 'index.html';
+    }
+
+    function renderNav() {
+      const user = getUser();
+      const navBtns = document.getElementById('navBtns');
+      if (user) {
+        navBtns.innerHTML = `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`;
+      } else {
+        navBtns.innerHTML = `
+          <button class="btn-outline" onclick="window.location='index.html'">تسجيل دخول</button>
+          <button class="btn-green" onclick="window.location='index.html'">إنشاء حساب</button>
+        `;
+      }
+    }
+
+    // ============================================
+    // جلب الحجوزات من الباك إند
+    // ============================================
+    async function loadBookings() {
+      const list = document.getElementById('bookingsList');
+
+      if (!getToken()) {
+        list.innerHTML = `
+          <div class="empty">
+            <div>🔒</div>
+            <p>لازم تسجل دخول الأول عشان تشوف حجوزاتك</p>
+            <button onclick="window.location='index.html'">سجّل دخول</button>
+          </div>`;
+        document.getElementById('summaryRow').innerHTML = '';
+        return;
+      }
+
+      try {
+        const res = await fetch(`${API_URL}/bookings`, {
+          headers: { 'Authorization': 'Bearer ' + getToken() }
+        });
+
+        if (res.status === 401) {
+          logout();
+          return;
+        }
+
+        if (!res.ok) throw new Error('فشل تحميل الحجوزات');
+        bookings = await res.json();
+
+        renderSummary();
+        renderBookings();
+
+      } catch (err) {
+        console.error(err);
+        list.innerHTML = '<div class="error-msg">❌ مش قادر أوصل للسيرفر</div>';
+      }
+    }
+
+    // ============================================
+    // كروت الملخص
+    // ============================================
+    function renderSummary() {
+      const upcoming  = bookings.filter(b => b.status === 'upcoming').length;
+      const completed = bookings.filter(b => b.status === 'completed').length;
+      const cancelled = bookings.filter(b => b.status === 'cancelled').length;
+      const totalSpent = bookings.filter(b => b.status !== 'cancelled').reduce((s,b) => s + b.price, 0);
+
+      const cards = [
+        { icon: '⏳', bg: '#4ade8015', num: upcoming,  lbl: 'حجز قادم',   col: '#4ade80' },
+        { icon: '✅', bg: '#3b82f615', num: completed, lbl: 'مباراة خلصت', col: '#3b82f6' },
+        { icon: '❌', bg: '#f8717115', num: cancelled, lbl: 'حجز ملغي',   col: '#f87171' },
+        { icon: '💰', bg: '#f59e0b15', num: totalSpent + ' ج', lbl: 'إجمالي الإنفاق', col: '#f59e0b' },
+      ];
+
+      document.getElementById('summaryRow').innerHTML = cards.map(c => `
+        <div class="sum-card">
+          <div class="sum-icon" style="background:${c.bg};font-size:22px">${c.icon}</div>
+          <div><div class="num" style="color:${c.col}">${c.num}</div><div class="lbl">${c.lbl}</div></div>
+        </div>
+      `).join('');
+    }
+
+    // ============================================
+    // الفلاتر
+    // ============================================
+    function setFilter(f, btn) {
+      activeFilter = f;
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderBookings();
+    }
+
+    // ============================================
+    // عرض الحجوزات
+    // ============================================
+    function renderBookings() {
+      const filtered = activeFilter === 'all' ? bookings : bookings.filter(b => b.status === activeFilter);
+      const list = document.getElementById('bookingsList');
+
+      if (!filtered.length) {
+        list.innerHTML = `
+          <div class="empty">
+            <div>📭</div>
+            <p>مفيش حجوزات هنا</p>
+            <button onclick="window.location='index.html'">احجز دلوقتي</button>
+          </div>`;
+        return;
+      }
+
+      list.innerHTML = filtered.map(b => {
+        const d = new Date(b.date + 'T00:00:00');
+        const day     = d.getDate();
+        const month   = monthsAr[d.getMonth()];
+        const weekday = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'][d.getDay()];
+
+        const statusLabel = { upcoming: '⏳ قادم', completed: '✅ منتهي', cancelled: '❌ ملغي' }[b.status];
+        const statusClass = { upcoming: 'status-upcoming', completed: 'status-completed', cancelled: 'status-cancelled' }[b.status];
+
+        const actions = b.status === 'upcoming'
+          ? `<button class="action-btn danger" onclick="openCancel(${b.id})">إلغاء</button>`
+          : b.status === 'completed'
+          ? `<button class="action-btn primary" onclick="window.location='ratings.html'">قيّم اللاعبين</button>`
+          : '';
+
+        return `
+          <div class="booking-card ${b.status}">
+            <div class="date-block">
+              <div class="day">${day}</div>
+              <div class="month">${month}</div>
+              <div class="weekday">${weekday}</div>
+            </div>
+            <div class="booking-info">
+              <h3>${b.field.emoji} ${b.field.name} — ${b.field.location}</h3>
+              <div class="booking-meta">
+                <span class="meta-item">🕐 ${b.time}</span>
+                <span class="meta-item">⏱ ${b.duration} ساعة</span>
+                <span class="meta-item">💰 ${b.price} جنيه</span>
+              </div>
+              <div class="booking-tags">
+                <span class="tag">${b.field.type}</span>
+                <span class="tag">${b.field.surface}</span>
+              </div>
+            </div>
+            <div class="booking-actions">
+              <span class="status-badge ${statusClass}">${statusLabel}</span>
+              ${actions}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    // ============================================
+    // إلغاء الحجز
+    // ============================================
+    function openCancel(id) {
+      cancelTargetId = id;
+      const b = bookings.find(b => b.id === id);
+      const d = new Date(b.date + 'T00:00:00');
+      document.getElementById('cancelMsg').textContent =
+        `هتلغي حجز ${b.field.name} يوم ${d.getDate()} ${monthsAr[d.getMonth()]} الساعة ${b.time}.`;
+      document.getElementById('cancelModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCancel() {
+      document.getElementById('cancelModal').classList.remove('active');
+      document.body.style.overflow = '';
+      cancelTargetId = null;
+    }
+
+    async function confirmCancel() {
+      if (!cancelTargetId) return;
+      try {
+        const res = await fetch(`${API_URL}/bookings/${cancelTargetId}/cancel`, {
+          method: 'PATCH',
+          headers: { 'Authorization': 'Bearer ' + getToken() }
+        });
+        const data = await res.json();
+
+        if (!res.ok) {
+          showToast('⚠️ ' + (data.error || 'حصل خطأ'), true);
+          closeCancel();
+          return;
+        }
+
+        closeCancel();
+        showToast('❌ تم إلغاء الحجز', true);
+        loadBookings();
+
+      } catch {
+        showToast('❌ مش قادر أوصل للسيرفر', true);
+        closeCancel();
+      }
+    }
+
+    document.getElementById('cancelModal').addEventListener('click', function(e) { if (e.target === this) closeCancel(); });
+
+    // ============================================
+    // Toast
+    // ============================================
+    function showToast(msg, isRed) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.className = 'toast show' + (isRed ? ' red' : '');
+      setTimeout(() => t.classList.remove('show'), 3500);
+    }
+
+    // ============================================
+    // Init
+    // ============================================
+    renderNav();
+    loadBookings();
+  </script>
+</body>
+</html>
