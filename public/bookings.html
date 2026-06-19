@@ -1,381 +1,878 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ملاعبنا - حجوزاتي</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #0f1117; color: #f0f0f0; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ملاعبنا - حجوزاتي</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #0f1117;
+        color: #f0f0f0;
+      }
 
-    nav {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 18px 60px; background: #161820;
-      border-bottom: 1px solid #2a2d3a; position: sticky; top: 0; z-index: 100;
-    }
-    .logo { font-size: 22px; font-weight: 700; color: #4ade80; text-decoration: none; }
-    .logo span { color: #fff; }
-    nav ul { list-style: none; display: flex; gap: 32px; }
-    nav ul li a { text-decoration: none; color: #aaa; font-size: 15px; transition: color 0.2s; }
-    nav ul li a:hover { color: #4ade80; }
-    nav ul li a.active { color: #4ade80; }
-    .nav-btns { display: flex; gap: 12px; align-items: center; }
-    .btn-outline { padding: 8px 20px; border: 1px solid #4ade80; color: #4ade80; border-radius: 8px; background: transparent; cursor: pointer; font-size: 14px; }
-    .btn-green { padding: 8px 20px; background: #4ade80; color: #0f1117; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; }
-    .user-chip { display: flex; align-items: center; gap: 8px; background: #1e2030; padding: 6px 16px; border-radius: 20px; font-size: 14px; cursor: pointer; }
-    .user-chip:hover { background: #2a2d3a; }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 24px;
+        background: #161820;
+        border-bottom: 1px solid #2a2d3a;
+        position: sticky;
+        top: 0;
+        z-index: 200;
+      }
+      .logo {
+        font-size: 20px;
+        font-weight: 700;
+        color: #4ade80;
+        text-decoration: none;
+      }
+      .logo span {
+        color: #fff;
+      }
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 24px;
+      }
+      .nav-links li a {
+        text-decoration: none;
+        color: #aaa;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+      .nav-links li a:hover,
+      .nav-links li a.active {
+        color: #4ade80;
+      }
+      .nav-btns {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .user-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: #1e2030;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .user-chip:hover {
+        background: #2a2d3a;
+      }
+      .btn-outline {
+        padding: 7px 16px;
+        border: 1px solid #4ade80;
+        color: #4ade80;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .btn-green {
+        padding: 7px 16px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: #f0f0f0;
+        border-radius: 2px;
+      }
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background: #161820;
+        border-bottom: 1px solid #2a2d3a;
+        position: sticky;
+        top: 57px;
+        z-index: 199;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        padding: 14px 24px;
+        color: #aaa;
+        text-decoration: none;
+        font-size: 15px;
+        border-bottom: 1px solid #1e2030;
+      }
+      .mobile-menu a.active {
+        color: #4ade80;
+      }
+      .mobile-menu .mob-btns {
+        padding: 14px 24px;
+        display: flex;
+        gap: 10px;
+      }
+      .mobile-menu .mob-btns button {
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: inherit;
+      }
 
-    .page-header { padding: 50px 60px 0; background: radial-gradient(ellipse at top right, #1a2e1a 0%, #0f1117 60%); }
-    .page-header h1 { font-size: 34px; font-weight: 800; margin-bottom: 8px; }
-    .page-header h1 span { color: #4ade80; }
-    .page-header p { color: #666; font-size: 15px; margin-bottom: 32px; }
+      .page-header {
+        padding: 36px 24px 0;
+        background: radial-gradient(
+          ellipse at top right,
+          #1a2e1a 0%,
+          #0f1117 60%
+        );
+      }
+      .page-header h1 {
+        font-size: clamp(24px, 5vw, 34px);
+        font-weight: 800;
+        margin-bottom: 6px;
+      }
+      .page-header h1 span {
+        color: #4ade80;
+      }
+      .page-header p {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
 
-    .summary-row { display: flex; gap: 16px; padding-bottom: 40px; flex-wrap: wrap; }
-    .sum-card { flex: 1; min-width: 140px; background: #161820; border: 1px solid #2a2d3a; border-radius: 12px; padding: 20px 22px; display: flex; align-items: center; gap: 16px; }
-    .sum-icon { width: 46px; height: 46px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-    .sum-card .num { font-size: 24px; font-weight: 800; }
-    .sum-card .lbl { font-size: 12px; color: #666; margin-top: 2px; }
+      .summary-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        padding-bottom: 32px;
+      }
+      @media (min-width: 600px) {
+        .summary-row {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+      .sum-card {
+        background: #161820;
+        border: 1px solid #2a2d3a;
+        border-radius: 12px;
+        padding: 16px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .sum-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        flex-shrink: 0;
+      }
+      .sum-card .num {
+        font-size: 20px;
+        font-weight: 800;
+      }
+      .sum-card .lbl {
+        font-size: 11px;
+        color: #666;
+        margin-top: 2px;
+      }
 
-    .main { padding: 36px 60px; max-width: 900px; }
+      .main {
+        padding: 24px 16px;
+      }
+      @media (min-width: 768px) {
+        .main {
+          padding: 32px 40px;
+        }
+      }
 
-    .filters-row { display: flex; gap: 10px; margin-bottom: 24px; flex-wrap: wrap; align-items: center; }
-    .filter-btn { padding: 7px 18px; border-radius: 20px; font-size: 13px; border: 1px solid #2a2d3a; background: #0f1117; color: #888; cursor: pointer; transition: all 0.2s; font-family: inherit; }
-    .filter-btn:hover { border-color: #4ade80; color: #4ade80; }
-    .filter-btn.active { background: #4ade8015; border-color: #4ade80; color: #4ade80; font-weight: 600; }
+      .filters-row {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+      }
+      .filter-btn {
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        border: 1px solid #2a2d3a;
+        background: #0f1117;
+        color: #888;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+        white-space: nowrap;
+      }
+      .filter-btn.active {
+        background: #4ade8015;
+        border-color: #4ade80;
+        color: #4ade80;
+        font-weight: 600;
+      }
 
-    .booking-card {
-      background: #161820; border: 1px solid #2a2d3a; border-radius: 14px;
-      padding: 22px 24px; margin-bottom: 16px;
-      display: grid; grid-template-columns: auto 1fr auto; gap: 20px; align-items: center;
-      transition: border-color 0.2s; position: relative; overflow: hidden;
-    }
-    .booking-card:hover { border-color: #4ade8050; }
-    .booking-card::before { content: ''; position: absolute; right: 0; top: 0; bottom: 0; width: 4px; }
-    .booking-card.upcoming::before { background: #4ade80; }
-    .booking-card.completed::before { background: #3b82f6; }
-    .booking-card.cancelled::before { background: #f87171; }
+      .booking-card {
+        background: #161820;
+        border: 1px solid #2a2d3a;
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        position: relative;
+        overflow: hidden;
+        transition: border-color 0.2s;
+      }
+      @media (min-width: 600px) {
+        .booking-card {
+          flex-direction: row;
+          align-items: center;
+          padding: 20px 22px;
+        }
+      }
+      .booking-card::before {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+      }
+      .booking-card.upcoming::before {
+        background: #4ade80;
+      }
+      .booking-card.completed::before {
+        background: #3b82f6;
+      }
+      .booking-card.cancelled::before {
+        background: #f87171;
+      }
 
-    .date-block { text-align: center; min-width: 64px; background: #0f1117; border: 1px solid #2a2d3a; border-radius: 10px; padding: 10px 14px; }
-    .date-block .day { font-size: 26px; font-weight: 800; color: #4ade80; line-height: 1; }
-    .date-block .month { font-size: 12px; color: #666; margin-top: 4px; }
-    .date-block .weekday { font-size: 11px; color: #888; margin-top: 2px; }
+      .date-block {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      @media (min-width: 600px) {
+        .date-block {
+          flex-direction: column;
+          align-items: center;
+          gap: 0;
+          min-width: 60px;
+        }
+      }
+      .date-num {
+        font-size: 28px;
+        font-weight: 800;
+        color: #4ade80;
+        line-height: 1;
+      }
+      .date-info {
+        font-size: 12px;
+        color: #666;
+      }
+      @media (min-width: 600px) {
+        .date-info {
+          text-align: center;
+        }
+      }
 
-    .booking-info h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
-    .booking-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 10px; }
-    .meta-item { display: flex; align-items: center; gap: 5px; font-size: 13px; color: #888; }
-    .booking-tags { display: flex; gap: 8px; flex-wrap: wrap; }
-    .tag { font-size: 11px; padding: 3px 10px; border-radius: 5px; background: #1e2030; color: #888; }
+      .booking-info {
+        flex: 1;
+      }
+      .booking-info h3 {
+        font-size: 15px;
+        font-weight: 700;
+        margin-bottom: 6px;
+      }
+      .booking-meta {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 8px;
+      }
+      .meta-item {
+        font-size: 12px;
+        color: #888;
+      }
+      .booking-tags {
+        display: flex;
+        gap: 6px;
+        flex-wrap: wrap;
+      }
+      .tag {
+        font-size: 11px;
+        padding: 3px 9px;
+        border-radius: 5px;
+        background: #1e2030;
+        color: #888;
+      }
 
-    .booking-actions { display: flex; flex-direction: column; gap: 8px; align-items: flex-end; }
-    .status-badge { font-size: 12px; padding: 5px 12px; border-radius: 6px; font-weight: 600; white-space: nowrap; }
-    .status-upcoming { background: #4ade8015; color: #4ade80; }
-    .status-completed { background: #3b82f615; color: #3b82f6; }
-    .status-cancelled { background: #f8717115; color: #f87171; }
+      .booking-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      @media (min-width: 600px) {
+        .booking-actions {
+          flex-direction: column;
+          align-items: flex-end;
+        }
+      }
+      .status-badge {
+        font-size: 11px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+      .status-upcoming {
+        background: #4ade8015;
+        color: #4ade80;
+      }
+      .status-completed {
+        background: #3b82f615;
+        color: #3b82f6;
+      }
+      .status-cancelled {
+        background: #f8717115;
+        color: #f87171;
+      }
+      .action-btn {
+        font-size: 12px;
+        padding: 6px 12px;
+        border-radius: 7px;
+        cursor: pointer;
+        font-family: inherit;
+        transition: all 0.2s;
+        border: 1px solid #2a2d3a;
+        background: transparent;
+        color: #888;
+      }
+      .action-btn:hover {
+        border-color: #4ade80;
+        color: #4ade80;
+      }
+      .action-btn.danger:hover {
+        border-color: #f87171;
+        color: #f87171;
+      }
+      .action-btn.primary {
+        background: #4ade8015;
+        border-color: #4ade8040;
+        color: #4ade80;
+      }
+      .action-btn.primary:hover {
+        background: #4ade80;
+        color: #0f1117;
+      }
 
-    .action-btn { font-size: 12px; padding: 6px 14px; border-radius: 7px; cursor: pointer; font-family: inherit; transition: all 0.2s; border: 1px solid #2a2d3a; background: transparent; color: #888; }
-    .action-btn:hover { border-color: #4ade80; color: #4ade80; }
-    .action-btn.danger:hover { border-color: #f87171; color: #f87171; }
-    .action-btn.primary { background: #4ade8015; border-color: #4ade8040; color: #4ade80; }
-    .action-btn.primary:hover { background: #4ade80; color: #0f1117; }
+      .empty,
+      .loading-msg,
+      .error-msg {
+        text-align: center;
+        padding: 50px 20px;
+        color: #444;
+      }
+      .empty div {
+        font-size: 44px;
+        margin-bottom: 14px;
+      }
+      .empty p {
+        font-size: 14px;
+        margin-bottom: 18px;
+      }
+      .empty button {
+        padding: 10px 22px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+      }
+      .error-msg {
+        color: #f87171;
+      }
 
-    .empty, .loading-msg, .error-msg { text-align: center; padding: 60px 20px; color: #444; }
-    .empty div, .loading-msg { font-size: 48px; margin-bottom: 16px; }
-    .empty p { font-size: 15px; margin-bottom: 20px; }
-    .error-msg { color: #f87171; font-size: 15px; }
-    .empty button { padding: 10px 24px; background: #4ade80; color: #0f1117; border: none; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; }
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 999;
+        align-items: flex-end;
+        justify-content: center;
+      }
+      @media (min-width: 600px) {
+        .modal-overlay {
+          align-items: center;
+        }
+      }
+      .modal-overlay.active {
+        display: flex;
+      }
+      .modal {
+        background: #161820;
+        border: 1px solid #2a2d3a;
+        border-radius: 18px 18px 0 0;
+        padding: 28px 20px;
+        width: 100%;
+        max-width: 440px;
+        position: relative;
+        animation: slideUp 0.3s ease;
+      }
+      @media (min-width: 600px) {
+        .modal {
+          border-radius: 18px;
+          padding: 32px;
+        }
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .modal-close {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: none;
+        border: none;
+        color: #666;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .modal h2 {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      .modal p {
+        color: #888;
+        font-size: 14px;
+        line-height: 1.7;
+        margin-bottom: 20px;
+      }
+      .modal-actions {
+        display: flex;
+        gap: 10px;
+      }
+      .btn-cancel-confirm {
+        flex: 1;
+        padding: 11px;
+        background: #f8717115;
+        color: #f87171;
+        border: 1px solid #f8717140;
+        border-radius: 9px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+      }
+      .btn-cancel-confirm:hover {
+        background: #f87171;
+        color: #fff;
+      }
+      .btn-keep {
+        flex: 1;
+        padding: 11px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 9px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: inherit;
+      }
 
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.75); z-index: 999; align-items: center; justify-content: center; }
-    .modal-overlay.active { display: flex; }
-    .modal { background: #161820; border: 1px solid #2a2d3a; border-radius: 18px; padding: 36px; width: 400px; max-width: 95vw; position: relative; animation: slideUp 0.25s ease; }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
-    .modal-close { position: absolute; top: 16px; left: 16px; background: none; border: none; color: #666; font-size: 20px; cursor: pointer; }
-    .modal-close:hover { color: #fff; }
-    .modal h2 { font-size: 18px; font-weight: 700; margin-bottom: 10px; }
-    .modal p { color: #888; font-size: 14px; line-height: 1.7; margin-bottom: 24px; }
-    .modal-actions { display: flex; gap: 10px; }
-    .btn-cancel-confirm { flex: 1; padding: 11px; background: #f8717115; color: #f87171; border: 1px solid #f8717140; border-radius: 9px; cursor: pointer; font-size: 14px; font-weight: 600; font-family: inherit; }
-    .btn-cancel-confirm:hover { background: #f87171; color: #fff; }
-    .btn-keep { flex: 1; padding: 11px; background: #4ade80; color: #0f1117; border: none; border-radius: 9px; cursor: pointer; font-size: 14px; font-weight: 700; font-family: inherit; }
-    .btn-keep:hover { background: #22c55e; }
+      .toast {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #4ade80;
+        color: #0f1117;
+        padding: 12px 22px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        z-index: 9999;
+        width: max-content;
+        max-width: 90vw;
+        text-align: center;
+      }
+      .toast.show {
+        display: block;
+        animation: fadeUp 0.3s ease;
+      }
+      .toast.red {
+        background: #f87171;
+        color: #fff;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
 
-    .toast { display: none; position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: #4ade80; color: #0f1117; padding: 13px 26px; border-radius: 12px; font-weight: 700; font-size: 14px; z-index: 9999; }
-    .toast.show { display: block; animation: fadeUp 0.3s ease; }
-    .toast.red { background: #f87171; color: #fff; }
-    @keyframes fadeUp { from { opacity: 0; transform: translateX(-50%) translateY(14px); } to { opacity: 1; transform: translateX(-50%) translateY(0); } }
-  </style>
-</head>
-<body>
+      @media (max-width: 768px) {
+        .nav-links,
+        .nav-btns {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+      }
+      @media (min-width: 769px) {
+        .mobile-menu {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <a class="logo" href="index.html">⚽ ملاعب<span>نا</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="bookings.html" class="active">حجوزاتي</a></li>
+        <li><a href="ratings.html">التقييمات</a></li>
+      </ul>
+      <div class="nav-btns" id="navBtns"></div>
+      <button class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
 
-  <nav>
-    <a class="logo" href="index.html">⚽ ملاعب<span>نا</span></a>
-    <ul>
-      <li><a href="index.html">الرئيسية</a></li>
-      <li><a href="bookings.html" class="active">حجوزاتي</a></li>
-      <li><a href="ratings.html">التقييمات</a></li>
-    </ul>
-    <div class="nav-btns" id="navBtns"></div>
-  </nav>
-
-  <div class="page-header">
-    <h1>حجوزاتي <span>⚽</span></h1>
-    <p>كل حجوزاتك الحقيقية من قاعدة البيانات</p>
-    <div class="summary-row" id="summaryRow"></div>
-  </div>
-
-  <div class="main">
-    <div class="filters-row">
-      <button class="filter-btn active" onclick="setFilter('all', this)">الكل</button>
-      <button class="filter-btn" onclick="setFilter('upcoming', this)">⏳ القادمة</button>
-      <button class="filter-btn" onclick="setFilter('completed', this)">✅ المنتهية</button>
-      <button class="filter-btn" onclick="setFilter('cancelled', this)">❌ الملغية</button>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">الرئيسية</a>
+      <a href="bookings.html" class="active">حجوزاتي</a>
+      <a href="ratings.html">التقييمات</a>
+      <div class="mob-btns" id="mobBtns"></div>
     </div>
-    <div id="bookingsList"><div class="loading-msg">⏳</div></div>
-  </div>
 
-  <div class="modal-overlay" id="cancelModal">
-    <div class="modal">
-      <button class="modal-close" onclick="closeCancel()">✕</button>
-      <h2>❌ إلغاء الحجز</h2>
-      <p id="cancelMsg"></p>
-      <div class="modal-actions">
-        <button class="btn-cancel-confirm" onclick="confirmCancel()">نعم، إلغي الحجز</button>
-        <button class="btn-keep" onclick="closeCancel()">لا، احتفظ بيه</button>
+    <div class="page-header">
+      <h1>حجوزاتي <span>⚽</span></h1>
+      <p>كل حجوزاتك في مكان واحد</p>
+      <div class="summary-row" id="summaryRow"></div>
+    </div>
+
+    <div class="main">
+      <div class="filters-row">
+        <button class="filter-btn active" onclick="setFilter('all', this)">
+          الكل
+        </button>
+        <button class="filter-btn" onclick="setFilter('upcoming', this)">
+          ⏳ القادمة
+        </button>
+        <button class="filter-btn" onclick="setFilter('completed', this)">
+          ✅ المنتهية
+        </button>
+        <button class="filter-btn" onclick="setFilter('cancelled', this)">
+          ❌ الملغية
+        </button>
+      </div>
+      <div id="bookingsList"><div class="loading-msg">⏳</div></div>
+    </div>
+
+    <div class="modal-overlay" id="cancelModal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeCancel()">✕</button>
+        <h2>❌ إلغاء الحجز</h2>
+        <p id="cancelMsg"></p>
+        <div class="modal-actions">
+          <button class="btn-cancel-confirm" onclick="confirmCancel()">
+            نعم، إلغي
+          </button>
+          <button class="btn-keep" onclick="closeCancel()">لا، احتفظ</button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="toast" id="toast"></div>
+    <div class="toast" id="toast"></div>
 
-  <script>
-    // ⚠️ غيّر الرابط ده لما تنشر الباك إند على Railway
-    const API_URL = 'https://malaabna-production.up.railway.app/api';
-
-    let bookings = [];
-    let activeFilter = 'all';
-    let cancelTargetId = null;
-
-    const monthsAr = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-
-    // ============================================
-    // المصادقة
-    // ============================================
-    function getToken() { return localStorage.getItem('token'); }
-    function getUser() {
-      const u = localStorage.getItem('user');
-      return u ? JSON.parse(u) : null;
-    }
-    function logout() {
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
-      window.location = 'index.html';
-    }
-
-    function renderNav() {
-      const user = getUser();
-      const navBtns = document.getElementById('navBtns');
-      if (user) {
-        navBtns.innerHTML = `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`;
-      } else {
-        navBtns.innerHTML = `
-          <button class="btn-outline" onclick="window.location='index.html'">تسجيل دخول</button>
-          <button class="btn-green" onclick="window.location='index.html'">إنشاء حساب</button>
-        `;
-      }
-    }
-
-    // ============================================
-    // جلب الحجوزات من الباك إند
-    // ============================================
-    async function loadBookings() {
-      const list = document.getElementById('bookingsList');
-
-      if (!getToken()) {
-        list.innerHTML = `
-          <div class="empty">
-            <div>🔒</div>
-            <p>لازم تسجل دخول الأول عشان تشوف حجوزاتك</p>
-            <button onclick="window.location='index.html'">سجّل دخول</button>
-          </div>`;
-        document.getElementById('summaryRow').innerHTML = '';
-        return;
-      }
-
-      try {
-        const res = await fetch(`${API_URL}/bookings`, {
-          headers: { 'Authorization': 'Bearer ' + getToken() }
-        });
-
-        if (res.status === 401) {
-          logout();
-          return;
-        }
-
-        if (!res.ok) throw new Error('فشل تحميل الحجوزات');
-        bookings = await res.json();
-
-        renderSummary();
-        renderBookings();
-
-      } catch (err) {
-        console.error(err);
-        list.innerHTML = '<div class="error-msg">❌ مش قادر أوصل للسيرفر</div>';
-      }
-    }
-
-    // ============================================
-    // كروت الملخص
-    // ============================================
-    function renderSummary() {
-      const upcoming  = bookings.filter(b => b.status === 'upcoming').length;
-      const completed = bookings.filter(b => b.status === 'completed').length;
-      const cancelled = bookings.filter(b => b.status === 'cancelled').length;
-      const totalSpent = bookings.filter(b => b.status !== 'cancelled').reduce((s,b) => s + b.price, 0);
-
-      const cards = [
-        { icon: '⏳', bg: '#4ade8015', num: upcoming,  lbl: 'حجز قادم',   col: '#4ade80' },
-        { icon: '✅', bg: '#3b82f615', num: completed, lbl: 'مباراة خلصت', col: '#3b82f6' },
-        { icon: '❌', bg: '#f8717115', num: cancelled, lbl: 'حجز ملغي',   col: '#f87171' },
-        { icon: '💰', bg: '#f59e0b15', num: totalSpent + ' ج', lbl: 'إجمالي الإنفاق', col: '#f59e0b' },
+    <script>
+      const API_URL = "https://malaabna-production.up.railway.app/api";
+      let bookings = [],
+        activeFilter = "all",
+        cancelTargetId = null;
+      const monthsAr = [
+        "يناير",
+        "فبراير",
+        "مارس",
+        "أبريل",
+        "مايو",
+        "يونيو",
+        "يوليو",
+        "أغسطس",
+        "سبتمبر",
+        "أكتوبر",
+        "نوفمبر",
+        "ديسمبر",
       ];
 
-      document.getElementById('summaryRow').innerHTML = cards.map(c => `
-        <div class="sum-card">
-          <div class="sum-icon" style="background:${c.bg};font-size:22px">${c.icon}</div>
-          <div><div class="num" style="color:${c.col}">${c.num}</div><div class="lbl">${c.lbl}</div></div>
-        </div>
-      `).join('');
-    }
-
-    // ============================================
-    // الفلاتر
-    // ============================================
-    function setFilter(f, btn) {
-      activeFilter = f;
-      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      renderBookings();
-    }
-
-    // ============================================
-    // عرض الحجوزات
-    // ============================================
-    function renderBookings() {
-      const filtered = activeFilter === 'all' ? bookings : bookings.filter(b => b.status === activeFilter);
-      const list = document.getElementById('bookingsList');
-
-      if (!filtered.length) {
-        list.innerHTML = `
-          <div class="empty">
-            <div>📭</div>
-            <p>مفيش حجوزات هنا</p>
-            <button onclick="window.location='index.html'">احجز دلوقتي</button>
-          </div>`;
-        return;
+      function getToken() {
+        return localStorage.getItem("token");
+      }
+      function getUser() {
+        const u = localStorage.getItem("user");
+        return u ? JSON.parse(u) : null;
+      }
+      function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location = "index.html";
+      }
+      function toggleMenu() {
+        document.getElementById("mobileMenu").classList.toggle("open");
       }
 
-      list.innerHTML = filtered.map(b => {
-        const d = new Date(b.date + 'T00:00:00');
-        const day     = d.getDate();
-        const month   = monthsAr[d.getMonth()];
-        const weekday = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'][d.getDay()];
+      function renderNav() {
+        const user = getUser();
+        document.getElementById("navBtns").innerHTML = user
+          ? `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`
+          : `<button class="btn-outline" onclick="window.location='index.html'">دخول</button><button class="btn-green" onclick="window.location='index.html'">حساب جديد</button>`;
+        document.getElementById("mobBtns").innerHTML = user
+          ? `<button class="btn-outline" style="flex:1" onclick="logout()">خروج</button>`
+          : `<button class="btn-green" style="flex:1" onclick="window.location='index.html'">تسجيل دخول</button>`;
+      }
 
-        const statusLabel = { upcoming: '⏳ قادم', completed: '✅ منتهي', cancelled: '❌ ملغي' }[b.status];
-        const statusClass = { upcoming: 'status-upcoming', completed: 'status-completed', cancelled: 'status-cancelled' }[b.status];
+      async function loadBookings() {
+        const list = document.getElementById("bookingsList");
+        if (!getToken()) {
+          list.innerHTML = `<div class="empty"><div>🔒</div><p>لازم تسجل دخول الأول</p><button onclick="window.location='index.html'">سجّل دخول</button></div>`;
+          document.getElementById("summaryRow").innerHTML = "";
+          return;
+        }
+        try {
+          const res = await fetch(`${API_URL}/bookings`, {
+            headers: { Authorization: "Bearer " + getToken() },
+          });
+          if (res.status === 401) {
+            logout();
+            return;
+          }
+          if (!res.ok) throw new Error();
+          bookings = await res.json();
+          renderSummary();
+          renderBookings();
+        } catch {
+          list.innerHTML = '<div class="error-msg">❌ تعذّر الاتصال</div>';
+        }
+      }
 
-        const actions = b.status === 'upcoming'
-          ? `<button class="action-btn danger" onclick="openCancel(${b.id})">إلغاء</button>`
-          : b.status === 'completed'
-          ? `<button class="action-btn primary" onclick="window.location='ratings.html'">قيّم اللاعبين</button>`
-          : '';
+      function renderSummary() {
+        const upcoming = bookings.filter((b) => b.status === "upcoming").length;
+        const completed = bookings.filter(
+          (b) => b.status === "completed",
+        ).length;
+        const cancelled = bookings.filter(
+          (b) => b.status === "cancelled",
+        ).length;
+        const total = bookings
+          .filter((b) => b.status !== "cancelled")
+          .reduce((s, b) => s + b.price, 0);
+        const cards = [
+          {
+            icon: "⏳",
+            bg: "#4ade8015",
+            num: upcoming,
+            lbl: "قادم",
+            col: "#4ade80",
+          },
+          {
+            icon: "✅",
+            bg: "#3b82f615",
+            num: completed,
+            lbl: "منتهي",
+            col: "#3b82f6",
+          },
+          {
+            icon: "❌",
+            bg: "#f8717115",
+            num: cancelled,
+            lbl: "ملغي",
+            col: "#f87171",
+          },
+          {
+            icon: "💰",
+            bg: "#f59e0b15",
+            num: total + "ج",
+            lbl: "الإنفاق",
+            col: "#f59e0b",
+          },
+        ];
+        document.getElementById("summaryRow").innerHTML = cards
+          .map(
+            (c) => `
+        <div class="sum-card">
+          <div class="sum-icon" style="background:${c.bg}">${c.icon}</div>
+          <div><div class="num" style="color:${c.col}">${c.num}</div><div class="lbl">${c.lbl}</div></div>
+        </div>`,
+          )
+          .join("");
+      }
 
-        return `
+      function setFilter(f, btn) {
+        activeFilter = f;
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        renderBookings();
+      }
+
+      function renderBookings() {
+        const filtered =
+          activeFilter === "all"
+            ? bookings
+            : bookings.filter((b) => b.status === activeFilter);
+        const list = document.getElementById("bookingsList");
+        if (!filtered.length) {
+          list.innerHTML = `<div class="empty"><div>📭</div><p>مفيش حجوزات هنا</p><button onclick="window.location='index.html'">احجز دلوقتي</button></div>`;
+          return;
+        }
+        list.innerHTML = filtered
+          .map((b) => {
+            const d = new Date(b.date + "T00:00:00");
+            const statusLabel = {
+              upcoming: "⏳ قادم",
+              completed: "✅ منتهي",
+              cancelled: "❌ ملغي",
+            }[b.status];
+            const statusClass = {
+              upcoming: "status-upcoming",
+              completed: "status-completed",
+              cancelled: "status-cancelled",
+            }[b.status];
+            const actions =
+              b.status === "upcoming"
+                ? `<button class="action-btn danger" onclick="openCancel(${b.id})">إلغاء</button>`
+                : b.status === "completed"
+                  ? `<button class="action-btn primary" onclick="window.location='ratings.html'">قيّم</button>`
+                  : "";
+            return `
           <div class="booking-card ${b.status}">
             <div class="date-block">
-              <div class="day">${day}</div>
-              <div class="month">${month}</div>
-              <div class="weekday">${weekday}</div>
+              <div class="date-num">${d.getDate()}</div>
+              <div class="date-info">${monthsAr[d.getMonth()]}<br>${["الأحد", "الاثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"][d.getDay()]}</div>
             </div>
             <div class="booking-info">
               <h3>${b.field.emoji} ${b.field.name} — ${b.field.location}</h3>
               <div class="booking-meta">
                 <span class="meta-item">🕐 ${b.time}</span>
-                <span class="meta-item">⏱ ${b.duration} ساعة</span>
-                <span class="meta-item">💰 ${b.price} جنيه</span>
+                <span class="meta-item">💰 ${b.price} ج</span>
               </div>
-              <div class="booking-tags">
-                <span class="tag">${b.field.type}</span>
-                <span class="tag">${b.field.surface}</span>
-              </div>
+              <div class="booking-tags"><span class="tag">${b.field.type}</span><span class="tag">${b.field.surface}</span></div>
             </div>
             <div class="booking-actions">
               <span class="status-badge ${statusClass}">${statusLabel}</span>
               ${actions}
             </div>
           </div>`;
-      }).join('');
-    }
-
-    // ============================================
-    // إلغاء الحجز
-    // ============================================
-    function openCancel(id) {
-      cancelTargetId = id;
-      const b = bookings.find(b => b.id === id);
-      const d = new Date(b.date + 'T00:00:00');
-      document.getElementById('cancelMsg').textContent =
-        `هتلغي حجز ${b.field.name} يوم ${d.getDate()} ${monthsAr[d.getMonth()]} الساعة ${b.time}.`;
-      document.getElementById('cancelModal').classList.add('active');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeCancel() {
-      document.getElementById('cancelModal').classList.remove('active');
-      document.body.style.overflow = '';
-      cancelTargetId = null;
-    }
-
-    async function confirmCancel() {
-      if (!cancelTargetId) return;
-      try {
-        const res = await fetch(`${API_URL}/bookings/${cancelTargetId}/cancel`, {
-          method: 'PATCH',
-          headers: { 'Authorization': 'Bearer ' + getToken() }
-        });
-        const data = await res.json();
-
-        if (!res.ok) {
-          showToast('⚠️ ' + (data.error || 'حصل خطأ'), true);
-          closeCancel();
-          return;
-        }
-
-        closeCancel();
-        showToast('❌ تم إلغاء الحجز', true);
-        loadBookings();
-
-      } catch {
-        showToast('❌ مش قادر أوصل للسيرفر', true);
-        closeCancel();
+          })
+          .join("");
       }
-    }
 
-    document.getElementById('cancelModal').addEventListener('click', function(e) { if (e.target === this) closeCancel(); });
+      function openCancel(id) {
+        cancelTargetId = id;
+        const b = bookings.find((b) => b.id === id);
+        const d = new Date(b.date + "T00:00:00");
+        document.getElementById("cancelMsg").textContent =
+          `هتلغي حجز ${b.field.name} يوم ${d.getDate()} ${monthsAr[d.getMonth()]} الساعة ${b.time}.`;
+        document.getElementById("cancelModal").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+      function closeCancel() {
+        document.getElementById("cancelModal").classList.remove("active");
+        document.body.style.overflow = "";
+        cancelTargetId = null;
+      }
 
-    // ============================================
-    // Toast
-    // ============================================
-    function showToast(msg, isRed) {
-      const t = document.getElementById('toast');
-      t.textContent = msg;
-      t.className = 'toast show' + (isRed ? ' red' : '');
-      setTimeout(() => t.classList.remove('show'), 3500);
-    }
+      async function confirmCancel() {
+        try {
+          const res = await fetch(
+            `${API_URL}/bookings/${cancelTargetId}/cancel`,
+            {
+              method: "PATCH",
+              headers: { Authorization: "Bearer " + getToken() },
+            },
+          );
+          const data = await res.json();
+          if (!res.ok) {
+            showToast("⚠️ " + (data.error || "خطأ"), true);
+            closeCancel();
+            return;
+          }
+          closeCancel();
+          showToast("❌ تم الإلغاء", true);
+          loadBookings();
+        } catch {
+          showToast("❌ تعذّر الاتصال", true);
+          closeCancel();
+        }
+      }
 
-    // ============================================
-    // Init
-    // ============================================
-    renderNav();
-    loadBookings();
-  </script>
-</body>
+      document
+        .getElementById("cancelModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeCancel();
+        });
+
+      function showToast(msg, isRed) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.className = "toast show" + (isRed ? " red" : "");
+        setTimeout(() => t.classList.remove("show"), 3500);
+      }
+
+      renderNav();
+      loadBookings();
+    </script>
+  </body>
 </html>

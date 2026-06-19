@@ -22,85 +22,143 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 18px 60px;
+        padding: 14px 24px;
         background: #161820;
         border-bottom: 1px solid #2a2d3a;
         position: sticky;
         top: 0;
-        z-index: 100;
+        z-index: 200;
       }
       .logo {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 700;
         color: #4ade80;
+        text-decoration: none;
       }
       .logo span {
         color: #fff;
       }
-      nav ul {
+
+      /* Desktop nav */
+      .nav-links {
         list-style: none;
         display: flex;
-        gap: 32px;
+        gap: 24px;
       }
-      nav ul li a {
+      .nav-links li a {
         text-decoration: none;
         color: #aaa;
-        font-size: 15px;
+        font-size: 14px;
         transition: color 0.2s;
       }
-      nav ul li a:hover {
+      .nav-links li a:hover,
+      .nav-links li a.active {
         color: #4ade80;
       }
+
       .nav-btns {
         display: flex;
-        gap: 12px;
+        gap: 10px;
         align-items: center;
       }
       .btn-outline {
-        padding: 8px 20px;
+        padding: 7px 16px;
         border: 1px solid #4ade80;
         color: #4ade80;
         border-radius: 8px;
         background: transparent;
         cursor: pointer;
-        font-size: 14px;
-        transition: all 0.2s;
-      }
-      .btn-outline:hover {
-        background: #4ade8020;
+        font-size: 13px;
+        white-space: nowrap;
       }
       .btn-green {
-        padding: 8px 20px;
+        padding: 7px 16px;
         background: #4ade80;
         color: #0f1117;
         border: none;
         border-radius: 8px;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
-        transition: background 0.2s;
-      }
-      .btn-green:hover {
-        background: #22c55e;
+        white-space: nowrap;
       }
       .user-chip {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         background: #1e2030;
-        padding: 6px 16px;
+        padding: 6px 14px;
         border-radius: 20px;
-        font-size: 14px;
+        font-size: 13px;
         cursor: pointer;
+        white-space: nowrap;
       }
       .user-chip:hover {
         background: #2a2d3a;
       }
 
+      /* Hamburger */
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: #f0f0f0;
+        border-radius: 2px;
+        transition: all 0.3s;
+      }
+
+      /* Mobile menu */
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        background: #161820;
+        border-bottom: 1px solid #2a2d3a;
+        position: sticky;
+        top: 57px;
+        z-index: 199;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        padding: 14px 24px;
+        color: #aaa;
+        text-decoration: none;
+        font-size: 15px;
+        border-bottom: 1px solid #1e2030;
+      }
+      .mobile-menu a:hover,
+      .mobile-menu a.active {
+        color: #4ade80;
+        background: #4ade8008;
+      }
+      .mobile-menu .mob-btns {
+        display: flex;
+        gap: 10px;
+        padding: 14px 24px;
+      }
+      .mobile-menu .mob-btns button {
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+      }
+
       /* ===== HERO ===== */
       .hero {
         text-align: center;
-        padding: 100px 20px 80px;
+        padding: 70px 20px 60px;
         background: radial-gradient(
           ellipse at center top,
           #1a2e1a 0%,
@@ -112,35 +170,36 @@
         background: #4ade8015;
         border: 1px solid #4ade8040;
         color: #4ade80;
-        padding: 6px 16px;
+        padding: 5px 14px;
         border-radius: 20px;
-        font-size: 13px;
-        margin-bottom: 24px;
+        font-size: 12px;
+        margin-bottom: 20px;
       }
       .hero h1 {
-        font-size: 52px;
+        font-size: clamp(28px, 6vw, 52px);
         font-weight: 800;
         line-height: 1.2;
-        margin-bottom: 20px;
+        margin-bottom: 16px;
       }
       .hero h1 span {
         color: #4ade80;
       }
       .hero p {
-        font-size: 18px;
+        font-size: clamp(14px, 3vw, 18px);
         color: #888;
         max-width: 500px;
-        margin: 0 auto 40px;
+        margin: 0 auto 32px;
         line-height: 1.7;
       }
       .hero-btns {
         display: flex;
-        gap: 16px;
+        gap: 12px;
         justify-content: center;
+        flex-wrap: wrap;
       }
       .btn-big {
-        padding: 14px 36px;
-        font-size: 16px;
+        padding: 12px 28px;
+        font-size: clamp(13px, 2.5vw, 16px);
         font-weight: 600;
         border-radius: 10px;
         cursor: pointer;
@@ -167,23 +226,25 @@
 
       /* ===== FIELDS ===== */
       .fields-section {
-        padding: 80px 60px;
+        padding: 50px 20px;
       }
       .section-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 40px;
+        margin-bottom: 28px;
       }
       .section-header h2 {
-        font-size: 28px;
+        font-size: clamp(20px, 4vw, 28px);
         font-weight: 700;
       }
+
       .fields-grid {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
       }
+
       .field-card {
         background: #161820;
         border: 1px solid #2a2d3a;
@@ -199,31 +260,31 @@
       }
       .field-img {
         width: 100%;
-        height: 180px;
+        height: 160px;
         background: linear-gradient(135deg, #1a3a1a, #0d2210);
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 60px;
+        font-size: 56px;
       }
       .field-info {
-        padding: 20px;
+        padding: 18px;
       }
       .field-info h3 {
-        font-size: 17px;
+        font-size: 15px;
         font-weight: 600;
         margin-bottom: 8px;
       }
       .field-meta {
         display: flex;
-        gap: 10px;
-        margin-bottom: 14px;
+        gap: 8px;
+        margin-bottom: 12px;
         flex-wrap: wrap;
       }
       .tag {
-        font-size: 12px;
-        padding: 4px 10px;
-        border-radius: 6px;
+        font-size: 11px;
+        padding: 3px 9px;
+        border-radius: 5px;
         background: #1e2030;
         color: #888;
       }
@@ -237,12 +298,12 @@
         align-items: center;
       }
       .price {
-        font-size: 18px;
+        font-size: 17px;
         font-weight: 700;
         color: #4ade80;
       }
       .price span {
-        font-size: 12px;
+        font-size: 11px;
         color: #666;
         font-weight: 400;
       }
@@ -253,7 +314,7 @@
       }
       .btn-book {
         width: 100%;
-        margin-top: 14px;
+        margin-top: 12px;
         padding: 10px;
         background: #4ade8015;
         color: #4ade80;
@@ -263,6 +324,7 @@
         font-size: 14px;
         font-weight: 600;
         transition: all 0.2s;
+        font-family: inherit;
       }
       .btn-book:hover {
         background: #4ade80;
@@ -275,7 +337,7 @@
         text-align: center;
         padding: 40px;
         color: #666;
-        grid-column: 1 / -1;
+        grid-column: 1/-1;
       }
       .error-msg {
         color: #f87171;
@@ -283,7 +345,7 @@
 
       footer {
         text-align: center;
-        padding: 30px;
+        padding: 24px 20px;
         border-top: 1px solid #1e2030;
         color: #444;
         font-size: 13px;
@@ -294,10 +356,15 @@
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.75);
+        background: rgba(0, 0, 0, 0.8);
         z-index: 999;
-        align-items: center;
+        align-items: flex-end;
         justify-content: center;
+      }
+      @media (min-width: 600px) {
+        .modal-overlay {
+          align-items: center;
+        }
       }
       .modal-overlay.active {
         display: flex;
@@ -305,17 +372,25 @@
       .modal {
         background: #161820;
         border: 1px solid #2a2d3a;
-        border-radius: 18px;
-        padding: 36px;
-        width: 440px;
-        max-width: 95vw;
+        border-radius: 18px 18px 0 0;
+        padding: 28px 20px;
+        width: 100%;
+        max-width: 480px;
         position: relative;
-        animation: slideUp 0.25s ease;
+        animation: slideUp 0.3s ease;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+      @media (min-width: 600px) {
+        .modal {
+          border-radius: 18px;
+          padding: 32px;
+        }
       }
       @keyframes slideUp {
         from {
           opacity: 0;
-          transform: translateY(30px);
+          transform: translateY(40px);
         }
         to {
           opacity: 1;
@@ -324,35 +399,35 @@
       }
       .modal-close {
         position: absolute;
-        top: 16px;
-        left: 16px;
+        top: 14px;
+        left: 14px;
         background: none;
         border: none;
         color: #666;
-        font-size: 22px;
+        font-size: 20px;
         cursor: pointer;
       }
       .modal-close:hover {
         color: #fff;
       }
       .modal h2 {
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 700;
         margin-bottom: 6px;
       }
       .modal-field-name {
         color: #4ade80;
-        font-size: 14px;
-        margin-bottom: 24px;
+        font-size: 13px;
+        margin-bottom: 20px;
       }
       .form-group {
-        margin-bottom: 18px;
+        margin-bottom: 16px;
       }
       .form-group label {
         display: block;
-        font-size: 13px;
+        font-size: 12px;
         color: #888;
-        margin-bottom: 8px;
+        margin-bottom: 7px;
       }
       .form-group input {
         width: 100%;
@@ -372,16 +447,21 @@
       .time-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 8px;
+        gap: 7px;
+      }
+      @media (max-width: 380px) {
+        .time-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
       }
       .time-slot {
-        padding: 8px;
+        padding: 8px 4px;
         text-align: center;
-        border-radius: 8px;
+        border-radius: 7px;
         border: 1px solid #2a2d3a;
         background: #0f1117;
         cursor: pointer;
-        font-size: 13px;
+        font-size: 12px;
         color: #888;
         transition: all 0.2s;
       }
@@ -399,8 +479,8 @@
         background: #0f1117;
         border: 1px solid #2a2d3a;
         border-radius: 10px;
-        padding: 14px 16px;
-        margin: 20px 0;
+        padding: 12px 14px;
+        margin: 16px 0;
         font-size: 13px;
         color: #888;
         line-height: 2;
@@ -419,6 +499,7 @@
         font-weight: 700;
         cursor: pointer;
         transition: background 0.2s;
+        font-family: inherit;
       }
       .btn-confirm:hover:not(:disabled) {
         background: #22c55e;
@@ -430,14 +511,14 @@
       .form-error {
         color: #f87171;
         font-size: 13px;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
         display: none;
       }
 
       /* ===== LOGIN MODAL ===== */
       .login-tabs {
         display: flex;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
         border-bottom: 1px solid #2a2d3a;
       }
       .login-tab {
@@ -462,16 +543,19 @@
       .toast {
         display: none;
         position: fixed;
-        bottom: 30px;
+        bottom: 24px;
         left: 50%;
         transform: translateX(-50%);
         background: #4ade80;
         color: #0f1117;
-        padding: 14px 28px;
+        padding: 12px 24px;
         border-radius: 12px;
         font-weight: 700;
-        font-size: 15px;
+        font-size: 14px;
         z-index: 9999;
+        width: max-content;
+        max-width: 90vw;
+        text-align: center;
       }
       .toast.show {
         display: block;
@@ -491,19 +575,53 @@
           transform: translateX(-50%) translateY(0);
         }
       }
+
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 768px) {
+        .nav-links,
+        .nav-btns {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+        .hero {
+          padding: 50px 16px 40px;
+        }
+        .fields-section {
+          padding: 36px 16px;
+        }
+      }
+
+      @media (min-width: 769px) {
+        .mobile-menu {
+          display: none !important;
+        }
+      }
     </style>
   </head>
   <body>
     <!-- NAVBAR -->
     <nav>
-      <div class="logo">⚽ ملاعب<span>نا</span></div>
-      <ul>
-        <li><a href="index.html">الرئيسية</a></li>
+      <a class="logo" href="index.html">⚽ ملاعب<span>نا</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">الرئيسية</a></li>
         <li><a href="bookings.html">حجوزاتي</a></li>
         <li><a href="ratings.html">التقييمات</a></li>
       </ul>
       <div class="nav-btns" id="navBtns"></div>
+      <button class="hamburger" onclick="toggleMenu()" aria-label="القائمة">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html" class="active">الرئيسية</a>
+      <a href="bookings.html">حجوزاتي</a>
+      <a href="ratings.html">التقييمات</a>
+      <div class="mob-btns" id="mobBtns"></div>
+    </div>
 
     <!-- HERO -->
     <section class="hero">
@@ -513,6 +631,9 @@
       <div class="hero-btns">
         <button class="btn-big green" onclick="scrollToFields()">
           احجز دلوقتي
+        </button>
+        <button class="btn-big outline" onclick="scrollToFields()">
+          تصفح الملاعب
         </button>
       </div>
     </section>
@@ -527,7 +648,7 @@
       </div>
     </section>
 
-    <footer><p>© 2026 ملاعبنا — جميع الحقوق محفوظة</p></footer>
+    <footer><p>© 2025 ملاعبنا — جميع الحقوق محفوظة</p></footer>
 
     <!-- BOOKING MODAL -->
     <div class="modal-overlay" id="bookingModal">
@@ -536,7 +657,6 @@
         <h2>📅 احجز ملعبك</h2>
         <div class="modal-field-name" id="modalFieldName"></div>
         <div class="form-error" id="bookingError"></div>
-
         <div class="form-group">
           <label>اختار التاريخ</label>
           <input type="date" id="bookingDate" />
@@ -575,7 +695,6 @@
           </button>
         </div>
         <div class="form-error" id="authError"></div>
-
         <div id="loginForm">
           <div class="form-group">
             <label>البريد الإلكتروني</label
@@ -591,7 +710,6 @@
           </div>
           <button class="btn-confirm" onclick="doLogin()">دخول</button>
         </div>
-
         <div id="registerForm" style="display: none">
           <div class="form-group">
             <label>الاسم</label
@@ -623,14 +741,11 @@
     <div class="toast" id="toast"></div>
 
     <script>
-      
-      // ⚠️ غيّر الرابط ده لما تنشر الباك إند على Railway
-      const API_URL = 'https://malaabna-production.up.railway.app/api';
+      const API_URL = "https://malaabna-production.up.railway.app/api";
 
       let fields = [];
       let selectedTime = null;
       let currentField = null;
-
       const allSlots = [
         "08:00",
         "09:00",
@@ -648,9 +763,6 @@
         "21:00",
       ];
 
-      // ============================================
-      // إدارة تسجيل الدخول (Token في localStorage)
-      // ============================================
       function getToken() {
         return localStorage.getItem("token");
       }
@@ -671,35 +783,32 @@
 
       function renderNav() {
         const user = getUser();
-        const navBtns = document.getElementById("navBtns");
-        if (user) {
-          navBtns.innerHTML = `
-          <div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>
-        `;
-        } else {
-          navBtns.innerHTML = `
-          <button class="btn-outline" onclick="openLogin()">تسجيل دخول</button>
-          <button class="btn-green" onclick="openLogin()">إنشاء حساب</button>
-        `;
-        }
+        const btns = `${
+          user
+            ? `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`
+            : `<button class="btn-outline" onclick="openLogin()">دخول</button><button class="btn-green" onclick="openLogin()">حساب جديد</button>`
+        }`;
+        document.getElementById("navBtns").innerHTML = btns;
+        document.getElementById("mobBtns").innerHTML = user
+          ? `<button class="btn-outline" style="flex:1" onclick="logout()">خروج</button>`
+          : `<button class="btn-outline" style="border-color:#4ade80;color:#4ade80" onclick="openLogin();toggleMenu()">دخول</button>
+           <button class="btn-green" onclick="openLogin();toggleMenu()">حساب جديد</button>`;
       }
 
-      // ============================================
-      // جلب الملاعب من الباك إند
-      // ============================================
+      function toggleMenu() {
+        document.getElementById("mobileMenu").classList.toggle("open");
+      }
+
       async function loadFields() {
         const grid = document.getElementById("fieldsGrid");
         try {
           const res = await fetch(`${API_URL}/bookings/fields`);
-          if (!res.ok) throw new Error("فشل تحميل الملاعب");
+          if (!res.ok) throw new Error();
           fields = await res.json();
-
           if (!fields.length) {
-            grid.innerHTML =
-              '<div class="empty-msg">مفيش ملاعب متاحة دلوقتي</div>';
+            grid.innerHTML = '<div class="empty-msg">مفيش ملاعب متاحة</div>';
             return;
           }
-
           grid.innerHTML = fields
             .map(
               (f) => `
@@ -714,18 +823,16 @@
               </div>
               <div class="field-footer">
                 <div class="price">${f.price} جنيه <span>/ ساعة</span></div>
-                ${f.mapUrl ? `<a class="map-link" href="${f.mapUrl}" target="_blank">📍 الموقع على الماب</a>` : ""}
+                ${f.mapUrl ? `<a class="map-link" href="${f.mapUrl}" target="_blank">📍 الموقع</a>` : ""}
               </div>
               <button class="btn-book" onclick="openBooking(${f.id})">احجز الآن</button>
             </div>
-          </div>
-        `,
+          </div>`,
             )
             .join("");
-        } catch (err) {
-          console.error(err);
+        } catch {
           grid.innerHTML =
-            '<div class="error-msg">❌ مش قادر أوصل للسيرفر. تأكد إن الباك إند شغال.</div>';
+            '<div class="error-msg">❌ تعذّر الاتصال بالسيرفر</div>';
         }
       }
 
@@ -735,43 +842,32 @@
           .scrollIntoView({ behavior: "smooth" });
       }
 
-      // ============================================
-      // نافذة الحجز
-      // ============================================
       function openBooking(fieldId) {
         if (!getToken()) {
-          showToast("⚠️ سجّل دخول الأول عشان تحجز", true);
+          showToast("⚠️ سجّل دخول الأول", true);
           openLogin();
           return;
         }
-
         currentField = fields.find((f) => f.id === fieldId);
         selectedTime = null;
-
         document.getElementById("modalFieldName").textContent =
           "📍 " + currentField.name + " - " + currentField.location;
         document.getElementById("bookingSummary").style.display = "none";
         document.getElementById("bookingError").style.display = "none";
         document.getElementById("confirmBtn").disabled = true;
-
-        buildTimeGrid();
-        document.getElementById("bookingModal").classList.add("active");
-        document.body.style.overflow = "hidden";
-      }
-
-      function closeBooking() {
-        document.getElementById("bookingModal").classList.remove("active");
-        document.body.style.overflow = "";
-      }
-
-      function buildTimeGrid() {
         const grid = document.getElementById("timeGrid");
         grid.innerHTML = allSlots
           .map(
-            (slot) =>
-              `<div class="time-slot" onclick="selectTime('${slot}', this)">${slot}</div>`,
+            (s) =>
+              `<div class="time-slot" onclick="selectTime('${s}',this)">${s}</div>`,
           )
           .join("");
+        document.getElementById("bookingModal").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+      function closeBooking() {
+        document.getElementById("bookingModal").classList.remove("active");
+        document.body.style.overflow = "";
       }
 
       function selectTime(slot, el) {
@@ -782,7 +878,6 @@
         selectedTime = slot;
         updateSummary();
       }
-
       function updateSummary() {
         if (!selectedTime || !currentField) return;
         const dateVal = document.getElementById("bookingDate").value;
@@ -794,7 +889,6 @@
           month: "long",
           day: "numeric",
         });
-
         document.getElementById("sumField").textContent = currentField.name;
         document.getElementById("sumDate").textContent = dateFormatted;
         document.getElementById("sumTime").textContent = selectedTime;
@@ -803,18 +897,13 @@
         document.getElementById("bookingSummary").style.display = "block";
         document.getElementById("confirmBtn").disabled = false;
       }
-
       document.getElementById("bookingDate").addEventListener("change", () => {
         if (selectedTime) updateSummary();
       });
 
-      // ============================================
-      // تأكيد الحجز — بيبعت طلب حقيقي للباك إند
-      // ============================================
       async function confirmBooking() {
         const errEl = document.getElementById("bookingError");
         errEl.style.display = "none";
-
         try {
           const res = await fetch(`${API_URL}/bookings`, {
             method: "POST",
@@ -830,32 +919,23 @@
               price: currentField.price,
             }),
           });
-
           const data = await res.json();
-
           if (!res.ok) {
             errEl.textContent = "⚠️ " + (data.error || "حصل خطأ");
             errEl.style.display = "block";
             return;
           }
-
           closeBooking();
           showToast(
-            "✅ تم الحجز بنجاح! موعدك " +
-              selectedTime +
-              " في " +
-              currentField.name,
+            "✅ تم الحجز! " + selectedTime + " في " + currentField.name,
             false,
           );
-        } catch (err) {
-          errEl.textContent = "❌ مش قادر أوصل للسيرفر";
+        } catch {
+          errEl.textContent = "❌ تعذّر الاتصال";
           errEl.style.display = "block";
         }
       }
 
-      // ============================================
-      // تسجيل الدخول والحساب الجديد
-      // ============================================
       function openLogin() {
         document.getElementById("authError").style.display = "none";
         document.getElementById("loginModal").classList.add("active");
@@ -866,12 +946,14 @@
         document.body.style.overflow = "";
       }
       function switchTab(tab) {
-        document.querySelectorAll(".login-tab").forEach((t, i) => {
-          t.classList.toggle(
-            "active",
-            (tab === "login" && i === 0) || (tab === "register" && i === 1),
+        document
+          .querySelectorAll(".login-tab")
+          .forEach((t, i) =>
+            t.classList.toggle(
+              "active",
+              (tab === "login" && i === 0) || (tab === "register" && i === 1),
+            ),
           );
-        });
         document.getElementById("loginForm").style.display =
           tab === "login" ? "block" : "none";
         document.getElementById("registerForm").style.display =
@@ -884,13 +966,11 @@
         const name = document.getElementById("registerName").value.trim();
         const email = document.getElementById("registerEmail").value.trim();
         const password = document.getElementById("registerPassword").value;
-
         if (!name || !email || !password) {
           errEl.textContent = "⚠️ كل الحقول مطلوبة";
           errEl.style.display = "block";
           return;
         }
-
         try {
           const res = await fetch(`${API_URL}/auth/register`, {
             method: "POST",
@@ -898,17 +978,15 @@
             body: JSON.stringify({ name, email, password }),
           });
           const data = await res.json();
-
           if (!res.ok) {
             errEl.textContent = "⚠️ " + (data.error || "حصل خطأ");
             errEl.style.display = "block";
             return;
           }
-
-          showToast("✅ تم إنشاء الحساب! دلوقتي سجّل دخول", false);
+          showToast("✅ تم إنشاء الحساب! سجّل دخول", false);
           switchTab("login");
         } catch {
-          errEl.textContent = "❌ مش قادر أوصل للسيرفر";
+          errEl.textContent = "❌ تعذّر الاتصال";
           errEl.style.display = "block";
         }
       }
@@ -917,13 +995,11 @@
         const errEl = document.getElementById("authError");
         const email = document.getElementById("loginEmail").value.trim();
         const password = document.getElementById("loginPassword").value;
-
         if (!email || !password) {
           errEl.textContent = "⚠️ كل الحقول مطلوبة";
           errEl.style.display = "block";
           return;
         }
-
         try {
           const res = await fetch(`${API_URL}/auth/login`, {
             method: "POST",
@@ -931,26 +1007,21 @@
             body: JSON.stringify({ email, password }),
           });
           const data = await res.json();
-
           if (!res.ok) {
             errEl.textContent = "⚠️ " + (data.error || "حصل خطأ");
             errEl.style.display = "block";
             return;
           }
-
           saveAuth(data.token, data.user);
           renderNav();
           closeLogin();
           showToast("👋 أهلاً " + data.user.name + "!", false);
         } catch {
-          errEl.textContent = "❌ مش قادر أوصل للسيرفر";
+          errEl.textContent = "❌ تعذّر الاتصال";
           errEl.style.display = "block";
         }
       }
 
-      // ============================================
-      // Toast
-      // ============================================
       function showToast(msg, isRed) {
         const t = document.getElementById("toast");
         t.textContent = msg;
@@ -958,9 +1029,6 @@
         setTimeout(() => t.classList.remove("show"), 4000);
       }
 
-      // ============================================
-      // إغلاق المودال بالضغط بره
-      // ============================================
       document
         .getElementById("bookingModal")
         .addEventListener("click", function (e) {
@@ -972,9 +1040,6 @@
           if (e.target === this) closeLogin();
         });
 
-      // ============================================
-      // Init
-      // ============================================
       window.addEventListener("load", () => {
         const today = new Date().toISOString().split("T")[0];
         document.getElementById("bookingDate").min = today;

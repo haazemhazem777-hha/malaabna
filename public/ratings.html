@@ -20,15 +20,15 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 18px 60px;
+        padding: 14px 24px;
         background: #161820;
         border-bottom: 1px solid #2a2d3a;
         position: sticky;
         top: 0;
-        z-index: 100;
+        z-index: 200;
       }
       .logo {
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 700;
         color: #4ade80;
         text-decoration: none;
@@ -36,61 +36,112 @@
       .logo span {
         color: #fff;
       }
-      nav ul {
+      .nav-links {
         list-style: none;
         display: flex;
-        gap: 32px;
+        gap: 24px;
       }
-      nav ul li a {
+      .nav-links li a {
         text-decoration: none;
         color: #aaa;
-        font-size: 15px;
+        font-size: 14px;
         transition: color 0.2s;
       }
-      nav ul li a:hover,
-      nav ul li a.active {
+      .nav-links li a:hover,
+      .nav-links li a.active {
         color: #4ade80;
       }
       .nav-btns {
         display: flex;
-        gap: 12px;
+        gap: 10px;
         align-items: center;
-      }
-      .btn-outline {
-        padding: 8px 20px;
-        border: 1px solid #4ade80;
-        color: #4ade80;
-        border-radius: 8px;
-        background: transparent;
-        cursor: pointer;
-        font-size: 14px;
-      }
-      .btn-green {
-        padding: 8px 20px;
-        background: #4ade80;
-        color: #0f1117;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 14px;
-        font-weight: 600;
       }
       .user-chip {
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
         background: #1e2030;
-        padding: 6px 16px;
+        padding: 6px 14px;
         border-radius: 20px;
-        font-size: 14px;
+        font-size: 13px;
         cursor: pointer;
       }
       .user-chip:hover {
         background: #2a2d3a;
       }
+      .btn-outline {
+        padding: 7px 16px;
+        border: 1px solid #4ade80;
+        color: #4ade80;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .btn-green {
+        padding: 7px 16px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: #f0f0f0;
+        border-radius: 2px;
+      }
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background: #161820;
+        border-bottom: 1px solid #2a2d3a;
+        position: sticky;
+        top: 57px;
+        z-index: 199;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        padding: 14px 24px;
+        color: #aaa;
+        text-decoration: none;
+        font-size: 15px;
+        border-bottom: 1px solid #1e2030;
+      }
+      .mobile-menu a.active {
+        color: #4ade80;
+      }
+      .mobile-menu .mob-btns {
+        padding: 14px 24px;
+        display: flex;
+        gap: 10px;
+      }
+      .mobile-menu .mob-btns button {
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: inherit;
+      }
 
       .page-header {
-        padding: 60px 60px 40px;
+        padding: 40px 20px 30px;
         background: radial-gradient(
           ellipse at center top,
           #1a2e1a 0%,
@@ -99,37 +150,50 @@
         text-align: center;
       }
       .page-header h1 {
-        font-size: 38px;
+        font-size: clamp(24px, 5vw, 38px);
         font-weight: 800;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
       }
       .page-header h1 span {
         color: #4ade80;
       }
       .page-header p {
         color: #666;
-        font-size: 16px;
+        font-size: 14px;
       }
 
       .match-selector {
-        padding: 30px 60px;
+        padding: 20px 16px;
         background: #12141c;
         border-bottom: 1px solid #1e2030;
       }
       .match-selector h3 {
-        font-size: 16px;
+        font-size: 14px;
         color: #888;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
       }
       .matches-row {
         display: flex;
-        gap: 14px;
+        gap: 12px;
         overflow-x: auto;
-        padding-bottom: 4px;
+        padding-bottom: 6px;
+        -webkit-overflow-scrolling: touch;
       }
+      .matches-row::-webkit-scrollbar {
+        height: 4px;
+      }
+      .matches-row::-webkit-scrollbar-track {
+        background: #1e2030;
+        border-radius: 2px;
+      }
+      .matches-row::-webkit-scrollbar-thumb {
+        background: #4ade8040;
+        border-radius: 2px;
+      }
+
       .match-card {
-        min-width: 220px;
-        padding: 16px 20px;
+        min-width: 190px;
+        padding: 14px 16px;
         background: #161820;
         border: 1px solid #2a2d3a;
         border-radius: 12px;
@@ -147,15 +211,15 @@
       .match-card .match-date {
         font-size: 11px;
         color: #666;
-        margin-bottom: 6px;
+        margin-bottom: 5px;
       }
       .match-card .match-name {
-        font-size: 14px;
+        font-size: 13px;
         font-weight: 600;
         margin-bottom: 4px;
       }
       .match-card .match-field {
-        font-size: 12px;
+        font-size: 11px;
         color: #4ade80;
       }
       .match-card .match-rated {
@@ -175,60 +239,69 @@
       }
 
       .main {
-        max-width: 700px;
+        max-width: 640px;
         margin: 0 auto;
-        padding: 40px 60px;
+        padding: 28px 16px;
+      }
+      @media (min-width: 768px) {
+        .main {
+          padding: 36px 24px;
+        }
       }
 
       .players-section h2 {
-        font-size: 20px;
+        font-size: clamp(17px, 3vw, 20px);
         font-weight: 700;
-        margin-bottom: 24px;
+        margin-bottom: 20px;
       }
 
       .player-card {
         background: #161820;
         border: 1px solid #2a2d3a;
         border-radius: 14px;
-        padding: 22px;
-        margin-bottom: 16px;
+        padding: 18px;
+        margin-bottom: 14px;
         transition: border-color 0.2s;
       }
       .player-card.rated {
         border-color: #4ade8040;
       }
-
       .player-top {
         display: flex;
         align-items: center;
-        gap: 14px;
-        margin-bottom: 18px;
+        gap: 12px;
+        margin-bottom: 16px;
       }
       .player-avatar {
-        width: 52px;
-        height: 52px;
+        width: 46px;
+        height: 46px;
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 22px;
+        font-size: 20px;
         font-weight: 700;
         flex-shrink: 0;
         background: #4ade8020;
       }
       .player-info {
         flex: 1;
+        min-width: 0;
       }
       .player-info h3 {
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
-        margin-bottom: 4px;
+        margin-bottom: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .player-badge {
         font-size: 11px;
-        padding: 4px 10px;
+        padding: 3px 9px;
         border-radius: 6px;
         font-weight: 600;
+        white-space: nowrap;
       }
       .badge-rated {
         background: #4ade8015;
@@ -243,7 +316,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
+        flex-wrap: wrap;
+        gap: 8px;
       }
       .rating-label {
         font-size: 13px;
@@ -259,7 +334,7 @@
         display: none;
       }
       .stars-input label {
-        font-size: 24px;
+        font-size: clamp(20px, 5vw, 26px);
         cursor: pointer;
         color: #2a2d3a;
         transition: color 0.15s;
@@ -273,7 +348,7 @@
 
       .comment-box {
         width: 100%;
-        padding: 10px 14px;
+        padding: 10px 12px;
         background: #0f1117;
         border: 1px solid #2a2d3a;
         border-radius: 8px;
@@ -283,36 +358,21 @@
         outline: none;
         font-family: inherit;
         transition: border-color 0.2s;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
       }
       .comment-box:focus {
         border-color: #4ade80;
       }
 
-      .btn-rate {
-        padding: 9px 22px;
-        background: #4ade80;
-        color: #0f1117;
-        border: none;
-        border-radius: 8px;
-        font-size: 14px;
-        font-weight: 700;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-      .btn-rate:hover {
-        background: #22c55e;
-      }
-
       .skills-row {
         display: flex;
-        gap: 8px;
+        gap: 7px;
         flex-wrap: wrap;
-        margin-bottom: 14px;
+        margin-bottom: 12px;
       }
       .skill-tag {
         font-size: 12px;
-        padding: 5px 12px;
+        padding: 5px 11px;
         border-radius: 20px;
         border: 1px solid #2a2d3a;
         color: #888;
@@ -330,21 +390,37 @@
         color: #4ade80;
       }
 
+      .btn-rate {
+        padding: 9px 20px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 8px;
+        font-size: 14px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: background 0.2s;
+        font-family: inherit;
+      }
+      .btn-rate:hover {
+        background: #22c55e;
+      }
+
       .empty-state {
         text-align: center;
-        padding: 60px 20px;
+        padding: 50px 20px;
         color: #444;
       }
       .empty-state div {
-        font-size: 48px;
-        margin-bottom: 16px;
+        font-size: 44px;
+        margin-bottom: 14px;
       }
       .empty-state p {
-        font-size: 15px;
-        margin-bottom: 20px;
+        font-size: 14px;
+        margin-bottom: 18px;
       }
       .empty-state button {
-        padding: 10px 24px;
+        padding: 10px 22px;
         background: #4ade80;
         color: #0f1117;
         border: none;
@@ -352,31 +428,34 @@
         cursor: pointer;
         font-size: 14px;
         font-weight: 600;
+        font-family: inherit;
       }
-      .error-msg {
-        text-align: center;
-        padding: 40px;
-        color: #f87171;
-      }
+      .error-msg,
       .loading-msg {
         text-align: center;
-        padding: 40px;
+        padding: 30px;
         color: #666;
+      }
+      .error-msg {
+        color: #f87171;
       }
 
       .toast {
         display: none;
         position: fixed;
-        bottom: 30px;
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
         background: #4ade80;
         color: #0f1117;
-        padding: 14px 28px;
+        padding: 12px 22px;
         border-radius: 12px;
         font-weight: 700;
-        font-size: 15px;
+        font-size: 14px;
         z-index: 9999;
+        width: max-content;
+        max-width: 90vw;
+        text-align: center;
       }
       .toast.show {
         display: block;
@@ -389,11 +468,26 @@
       @keyframes fadeUp {
         from {
           opacity: 0;
-          transform: translateX(-50%) translateY(16px);
+          transform: translateX(-50%) translateY(14px);
         }
         to {
           opacity: 1;
           transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links,
+        .nav-btns {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+      }
+      @media (min-width: 769px) {
+        .mobile-menu {
+          display: none !important;
         }
       }
     </style>
@@ -401,21 +495,31 @@
   <body>
     <nav>
       <a class="logo" href="index.html">⚽ ملاعب<span>نا</span></a>
-      <ul>
+      <ul class="nav-links">
         <li><a href="index.html">الرئيسية</a></li>
         <li><a href="bookings.html">حجوزاتي</a></li>
         <li><a href="ratings.html" class="active">التقييمات</a></li>
       </ul>
       <div class="nav-btns" id="navBtns"></div>
+      <button class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
     </nav>
 
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">الرئيسية</a>
+      <a href="bookings.html">حجوزاتي</a>
+      <a href="ratings.html" class="active">التقييمات</a>
+      <div class="mob-btns" id="mobBtns"></div>
+    </div>
+
     <div class="page-header">
-      <h1>قيّم <span>زملاءك</span> بعد المباراة</h1>
-      <p>تقييمك بيساعد اللاعبين يتطوروا ويبنوا سمعتهم على المنصة</p>
+      <h1>قيّم <span>زملاءك</span></h1>
+      <p>تقييمك بيساعد اللاعبين يبنوا سمعتهم على المنصة</p>
     </div>
 
     <div class="match-selector">
-      <h3>اختار المباراة اللي عايز تقيّم فيها</h3>
+      <h3>اختار المباراة</h3>
       <div class="matches-row" id="matchesRow">
         <div class="loading-msg">⏳</div>
       </div>
@@ -431,11 +535,9 @@
     <div class="toast" id="toast"></div>
 
     <script>
-      // ⚠️ غيّر الرابط ده لما تنشر الباك إند على Railway
-      const API_URL = 'https://malaabna-production.up.railway.app/api';
-
-      let matches = [];
-      let activeMatch = null;
+      const API_URL = "https://malaabna-production.up.railway.app/api";
+      let matches = [],
+        activeMatch = null;
       const skillsList = [
         "سرعة",
         "تمرير",
@@ -444,85 +546,6 @@
         "روح الفريق",
         "قيادة",
       ];
-
-      function getToken() {
-        return localStorage.getItem("token");
-      }
-      function getUser() {
-        const u = localStorage.getItem("user");
-        return u ? JSON.parse(u) : null;
-      }
-      function logout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        window.location = "index.html";
-      }
-
-      function renderNav() {
-        const user = getUser();
-        const navBtns = document.getElementById("navBtns");
-        if (user) {
-          navBtns.innerHTML = `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`;
-        } else {
-          navBtns.innerHTML = `
-          <button class="btn-outline" onclick="window.location='index.html'">تسجيل دخول</button>
-          <button class="btn-green" onclick="window.location='index.html'">إنشاء حساب</button>
-        `;
-        }
-      }
-
-      // ============================================
-      // جلب المباريات
-      // ============================================
-      async function loadMatches() {
-        const row = document.getElementById("matchesRow");
-
-        if (!getToken()) {
-          row.innerHTML = "";
-          document.getElementById("playersList").innerHTML = `
-          <div class="empty-state">
-            <div>🔒</div>
-            <p>لازم تسجل دخول الأول عشان تقيّم زملاءك</p>
-            <button onclick="window.location='index.html'">سجّل دخول</button>
-          </div>`;
-          return;
-        }
-
-        try {
-          const res = await fetch(`${API_URL}/ratings/matches/mine`, {
-            headers: { Authorization: "Bearer " + getToken() },
-          });
-
-          if (res.status === 401) {
-            logout();
-            return;
-          }
-          if (!res.ok) throw new Error("فشل تحميل المباريات");
-
-          matches = await res.json();
-
-          if (!matches.length) {
-            row.innerHTML = "";
-            document.getElementById("playersList").innerHTML = `
-            <div class="empty-state">
-              <div>⚽</div>
-              <p>مفيش مباريات منتهية لسه عشان تقيّم فيها</p>
-              <button onclick="window.location='index.html'">احجز ملعب</button>
-            </div>`;
-            return;
-          }
-
-          renderMatches();
-          activeMatch = matches[0].bookingId;
-          renderMatches();
-          renderPlayers();
-        } catch (err) {
-          console.error(err);
-          row.innerHTML =
-            '<div class="error-msg">❌ مش قادر أوصل للسيرفر</div>';
-        }
-      }
-
       const monthsAr = [
         "يناير",
         "فبراير",
@@ -538,20 +561,76 @@
         "ديسمبر",
       ];
 
-      function renderMatches() {
+      function getToken() {
+        return localStorage.getItem("token");
+      }
+      function getUser() {
+        const u = localStorage.getItem("user");
+        return u ? JSON.parse(u) : null;
+      }
+      function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location = "index.html";
+      }
+      function toggleMenu() {
+        document.getElementById("mobileMenu").classList.toggle("open");
+      }
+
+      function renderNav() {
+        const user = getUser();
+        document.getElementById("navBtns").innerHTML = user
+          ? `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`
+          : `<button class="btn-outline" onclick="window.location='index.html'">دخول</button><button class="btn-green" onclick="window.location='index.html'">حساب جديد</button>`;
+        document.getElementById("mobBtns").innerHTML = user
+          ? `<button class="btn-outline" style="flex:1" onclick="logout()">خروج</button>`
+          : `<button class="btn-green" style="flex:1" onclick="window.location='index.html'">تسجيل دخول</button>`;
+      }
+
+      async function loadMatches() {
         const row = document.getElementById("matchesRow");
-        row.innerHTML = matches
+        if (!getToken()) {
+          row.innerHTML = "";
+          document.getElementById("playersList").innerHTML = `
+          <div class="empty-state"><div>🔒</div><p>لازم تسجل دخول الأول</p>
+          <button onclick="window.location='index.html'">سجّل دخول</button></div>`;
+          return;
+        }
+        try {
+          const res = await fetch(`${API_URL}/ratings/matches/mine`, {
+            headers: { Authorization: "Bearer " + getToken() },
+          });
+          if (res.status === 401) {
+            logout();
+            return;
+          }
+          if (!res.ok) throw new Error();
+          matches = await res.json();
+          if (!matches.length) {
+            row.innerHTML = "";
+            document.getElementById("playersList").innerHTML = `
+            <div class="empty-state"><div>⚽</div><p>مفيش مباريات منتهية لسه</p>
+            <button onclick="window.location='index.html'">احجز ملعب</button></div>`;
+            return;
+          }
+          activeMatch = matches[0].bookingId;
+          renderMatches();
+          renderPlayers();
+        } catch {
+          row.innerHTML = '<div class="error-msg">❌ تعذّر الاتصال</div>';
+        }
+      }
+
+      function renderMatches() {
+        document.getElementById("matchesRow").innerHTML = matches
           .map((m) => {
             const d = new Date(m.date + "T00:00:00");
-            const dateStr = `${d.getDate()} ${monthsAr[d.getMonth()]}`;
             return `
           <div class="match-card ${m.bookingId === activeMatch ? "active" : ""}" onclick="selectMatch(${m.bookingId})">
-            <div class="match-date">${dateStr} — ${m.time}</div>
+            <div class="match-date">${d.getDate()} ${monthsAr[d.getMonth()]} — ${m.time}</div>
             <div class="match-name">${m.field.emoji} ${m.field.name}</div>
             <div class="match-field">📍 ${m.field.location}</div>
-            <span class="match-rated ${m.rated ? "done" : "pending"}">
-              ${m.rated ? "✅ تم التقييم" : "⏳ لم يتم التقييم"}
-            </span>
+            <span class="match-rated ${m.rated ? "done" : "pending"}">${m.rated ? "✅ تم التقييم" : "⏳ لم يتم"}</span>
           </div>`;
           })
           .join("");
@@ -563,30 +642,19 @@
         renderPlayers();
       }
 
-      // ============================================
-      // عرض اللاعبين للمباراة المختارة
-      // ============================================
       function renderPlayers() {
         const match = matches.find((m) => m.bookingId === activeMatch);
         const list = document.getElementById("playersList");
-
         if (!match) {
           list.innerHTML = "";
           return;
         }
-
         document.getElementById("playersTitle").textContent =
           `لاعبو ${match.field.name}`;
-
         if (!match.players.length) {
-          list.innerHTML = `
-          <div class="empty-state">
-            <div>👤</div>
-            <p>مفيش لاعبين تانيين حجزوا نفس الموعد في المباراة دي</p>
-          </div>`;
+          list.innerHTML = `<div class="empty-state"><div>👤</div><p>مفيش لاعبين تانيين في المباراة دي</p></div>`;
           return;
         }
-
         list.innerHTML = match.players
           .map(
             (p) => `
@@ -594,32 +662,20 @@
           <div class="player-top">
             <div class="player-avatar">🧑</div>
             <div class="player-info"><h3>${p.name}</h3></div>
-            <span class="player-badge badge-pending" id="badge-${p.id}">⏳ في الانتظار</span>
+            <span class="player-badge badge-pending" id="badge-${p.id}">⏳ انتظار</span>
           </div>
-
           <div class="rating-row">
-            <span class="rating-label">التقييم العام</span>
+            <span class="rating-label">التقييم</span>
             <div class="stars-input" id="stars-${p.id}">
-              ${[5, 4, 3, 2, 1]
-                .map(
-                  (n) => `
-                <input type="radio" name="star-${p.id}" id="s${p.id}-${n}" value="${n}"/>
-                <label for="s${p.id}-${n}">★</label>
-              `,
-                )
-                .join("")}
+              ${[5, 4, 3, 2, 1].map((n) => `<input type="radio" name="star-${p.id}" id="s${p.id}-${n}" value="${n}"/><label for="s${p.id}-${n}">★</label>`).join("")}
             </div>
           </div>
-
           <div class="skills-row" id="skills-${p.id}">
             ${skillsList.map((s) => `<span class="skill-tag" onclick="toggleSkill(this)">${s}</span>`).join("")}
           </div>
-
-          <textarea class="comment-box" id="comment-${p.id}" rows="2" placeholder="اكتب تعليق على أدائه... (اختياري)"></textarea>
-
+          <textarea class="comment-box" id="comment-${p.id}" rows="2" placeholder="تعليق على أدائه... (اختياري)"></textarea>
           <button class="btn-rate" onclick="submitRating(${p.id})">إرسال التقييم</button>
-        </div>
-      `,
+        </div>`,
           )
           .join("");
       }
@@ -628,28 +684,21 @@
         el.classList.toggle("selected");
       }
 
-      // ============================================
-      // إرسال التقييم للباك إند
-      // ============================================
       async function submitRating(playerId) {
         const checkedStar = document.querySelector(
           `input[name="star-${playerId}"]:checked`,
         );
         if (!checkedStar) {
-          showToast("⚠️ اختار عدد النجوم الأول!", true);
+          showToast("⚠️ اختار النجوم الأول!", true);
           return;
         }
         const stars = parseInt(checkedStar.value);
-
-        const skillEls = document.querySelectorAll(
-          `#skills-${playerId} .skill-tag.selected`,
-        );
-        const skills = Array.from(skillEls).map((el) => el.textContent);
-
+        const skills = Array.from(
+          document.querySelectorAll(`#skills-${playerId} .skill-tag.selected`),
+        ).map((el) => el.textContent);
         const comment = document
           .getElementById(`comment-${playerId}`)
           .value.trim();
-
         try {
           const res = await fetch(`${API_URL}/ratings`, {
             method: "POST",
@@ -665,24 +714,18 @@
               skills,
             }),
           });
-
           const data = await res.json();
-
           if (!res.ok) {
-            showToast("⚠️ " + (data.error || "حصل خطأ"), true);
+            showToast("⚠️ " + (data.error || "خطأ"), true);
             return;
           }
-
-          // حدّث الكارت في الواجهة
           document.getElementById(`card-${playerId}`).classList.add("rated");
           document.getElementById(`badge-${playerId}`).className =
             "player-badge badge-rated";
-          document.getElementById(`badge-${playerId}`).textContent =
-            "✅ تم التقييم";
-
-          showToast("✅ تم تقييم اللاعب بنجاح!", false);
-        } catch (err) {
-          showToast("❌ مش قادر أوصل للسيرفر", true);
+          document.getElementById(`badge-${playerId}`).textContent = "✅ تم";
+          showToast("✅ تم التقييم!", false);
+        } catch {
+          showToast("❌ تعذّر الاتصال", true);
         }
       }
 
@@ -693,9 +736,6 @@
         setTimeout(() => t.classList.remove("show"), 3500);
       }
 
-      // ============================================
-      // Init
-      // ============================================
       renderNav();
       loadMatches();
     </script>
