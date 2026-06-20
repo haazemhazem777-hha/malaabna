@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ملاعبنا - البروفايل</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        background: #0a0e14;
+        color: #f0f0f0;
+        min-height: 100vh;
+      }
+
+      /* ===== NAVBAR ===== */
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 14px 24px;
+        background: #161820;
+        border-bottom: 1px solid #2a2d3a;
+        position: sticky;
+        top: 0;
+        z-index: 200;
+      }
+      .logo {
+        font-size: 20px;
+        font-weight: 700;
+        color: #4ade80;
+        text-decoration: none;
+      }
+      .logo span {
+        color: #fff;
+      }
+      .nav-links {
+        list-style: none;
+        display: flex;
+        gap: 24px;
+      }
+      .nav-links li a {
+        text-decoration: none;
+        color: #aaa;
+        font-size: 14px;
+        transition: color 0.2s;
+      }
+      .nav-links li a:hover,
+      .nav-links li a.active {
+        color: #4ade80;
+      }
+      .nav-btns {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+      .user-chip {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: #1e2030;
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-size: 13px;
+        cursor: pointer;
+      }
+      .user-chip:hover {
+        background: #2a2d3a;
+      }
+      .btn-outline {
+        padding: 7px 16px;
+        border: 1px solid #4ade80;
+        color: #4ade80;
+        border-radius: 8px;
+        background: transparent;
+        cursor: pointer;
+        font-size: 13px;
+      }
+      .btn-green {
+        padding: 7px 16px;
+        background: #4ade80;
+        color: #0f1117;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-weight: 600;
+      }
+      .hamburger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+        padding: 4px;
+      }
+      .hamburger span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: #f0f0f0;
+        border-radius: 2px;
+      }
+      .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background: #161820;
+        border-bottom: 1px solid #2a2d3a;
+        position: sticky;
+        top: 57px;
+        z-index: 199;
+      }
+      .mobile-menu.open {
+        display: flex;
+      }
+      .mobile-menu a {
+        padding: 14px 24px;
+        color: #aaa;
+        text-decoration: none;
+        font-size: 15px;
+        border-bottom: 1px solid #1e2030;
+      }
+      .mobile-menu a.active {
+        color: #4ade80;
+      }
+      .mobile-menu .mob-btns {
+        padding: 14px 24px;
+        display: flex;
+        gap: 10px;
+      }
+      .mobile-menu .mob-btns button {
+        flex: 1;
+        padding: 10px;
+        border-radius: 8px;
+        font-size: 14px;
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      /* ===== PAGE ===== */
+      .page {
+        min-height: calc(100vh - 57px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 30px 16px;
+        background:
+          radial-gradient(ellipse at 20% 50%, #0d2e1a 0%, transparent 50%),
+          radial-gradient(ellipse at 80% 50%, #0a1f2e 0%, transparent 50%),
+          #0a0e14;
+      }
+
+      /* ===== CARD ===== */
+      .profile-card {
+        width: 100%;
+        max-width: 380px;
+        background: linear-gradient(
+          160deg,
+          #0f1f14 0%,
+          #0a1410 40%,
+          #0d1a0f 100%
+        );
+        border: 1.5px solid #00ffaa30;
+        border-radius: 24px;
+        overflow: hidden;
+        position: relative;
+        box-shadow:
+          0 0 40px #00ffaa15,
+          0 0 80px #00ffaa08,
+          inset 0 0 40px #00ffaa05;
+      }
+
+      /* Corner decorations */
+      .card-corner {
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        z-index: 2;
+        pointer-events: none;
+      }
+      .card-corner.tl {
+        top: 0;
+        right: 0;
+        border-top: 2px solid #00ffaa;
+        border-right: 2px solid #00ffaa;
+        border-radius: 0 24px 0 0;
+      }
+      .card-corner.tr {
+        top: 0;
+        left: 0;
+        border-top: 2px solid #00ffaa;
+        border-left: 2px solid #00ffaa;
+        border-radius: 24px 0 0 0;
+      }
+      .card-corner.bl {
+        bottom: 0;
+        right: 0;
+        border-bottom: 2px solid #00ffaa;
+        border-right: 2px solid #00ffaa;
+        border-radius: 0 0 0 24px;
+      }
+      .card-corner.br {
+        bottom: 0;
+        left: 0;
+        border-bottom: 2px solid #00ffaa;
+        border-left: 2px solid #00ffaa;
+        border-radius: 0 0 24px 0;
+      }
+
+      /* Diagonal lines decoration */
+      .card-deco {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+      .card-deco::before {
+        content: "";
+        position: absolute;
+        top: -30px;
+        right: -30px;
+        width: 140px;
+        height: 200px;
+        border: 1px solid #00ffaa15;
+        transform: rotate(30deg);
+      }
+      .card-deco::after {
+        content: "";
+        position: absolute;
+        bottom: 60px;
+        left: -20px;
+        width: 100px;
+        height: 160px;
+        border: 1px solid #00ffaa10;
+        transform: rotate(30deg);
+      }
+
+      /* ===== CARD CONTENT ===== */
+      .card-content {
+        position: relative;
+        z-index: 3;
+        padding: 32px 24px 0;
+      }
+
+      /* AVATAR */
+      .avatar-section {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+      }
+      .avatar-ring {
+        width: 140px;
+        height: 140px;
+        border-radius: 50%;
+        padding: 4px;
+        background: conic-gradient(
+          #00ffaa,
+          #00cc88,
+          #00ffaa80,
+          #00ffaa,
+          #00cc88
+        );
+        box-shadow:
+          0 0 30px #00ffaa60,
+          0 0 60px #00ffaa30;
+        position: relative;
+        cursor: pointer;
+      }
+      .avatar-ring input[type="file"] {
+        display: none;
+      }
+      .avatar-inner {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: #0f1f14;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        font-size: 56px;
+      }
+      .avatar-inner img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+      .avatar-edit-hint {
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #00ffaa;
+        color: #0a0e14;
+        font-size: 10px;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 10px;
+        white-space: nowrap;
+      }
+
+      /* NAME */
+      .player-name {
+        text-align: center;
+        font-size: 36px;
+        font-weight: 900;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        color: #fff;
+        text-shadow: 0 0 20px #00ffaa80;
+        margin-bottom: 6px;
+      }
+
+      /* AGE */
+      .player-age {
+        text-align: center;
+        font-size: 18px;
+        color: #00ffaa;
+        margin-bottom: 14px;
+        font-weight: 600;
+      }
+
+      /* BIO */
+      .player-bio {
+        text-align: center;
+        font-size: 13px;
+        color: #8a9a8e;
+        line-height: 1.7;
+        margin-bottom: 6px;
+        min-height: 44px;
+        padding: 0 8px;
+      }
+
+      /* ID */
+      .player-id {
+        text-align: center;
+        font-size: 11px;
+        color: #3a5a42;
+        margin-bottom: 24px;
+        letter-spacing: 1px;
+      }
+
+      /* STATS DIVIDER */
+      .stats-divider {
+        height: 1px;
+        background: linear-gradient(90deg, transparent, #00ffaa40, transparent);
+        margin: 0 -24px;
+      }
+
+      /* STATS */
+      .stats-row {
+        display: flex;
+        padding: 20px 0 28px;
+      }
+      .stat-item {
+        flex: 1;
+        text-align: center;
+        position: relative;
+      }
+      .stat-item:not(:last-child)::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: 10%;
+        bottom: 10%;
+        width: 1px;
+        background: linear-gradient(
+          180deg,
+          transparent,
+          #00ffaa40,
+          transparent
+        );
+      }
+      .stat-icon {
+        font-size: 24px;
+        margin-bottom: 6px;
+      }
+      .stat-num {
+        font-size: 22px;
+        font-weight: 800;
+        color: #00ffaa;
+        text-shadow: 0 0 10px #00ffaa60;
+      }
+      .stat-label {
+        font-size: 11px;
+        color: #5a7a62;
+        margin-top: 3px;
+      }
+
+      /* SPARKLE */
+      .sparkle {
+        text-align: center;
+        padding-bottom: 16px;
+        font-size: 16px;
+        color: #00ffaa40;
+      }
+
+      /* ===== EDIT MODAL ===== */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 999;
+        align-items: flex-end;
+        justify-content: center;
+      }
+      @media (min-width: 600px) {
+        .modal-overlay {
+          align-items: center;
+        }
+      }
+      .modal-overlay.active {
+        display: flex;
+      }
+      .modal {
+        background: #161820;
+        border: 1px solid #2a2d3a;
+        border-radius: 18px 18px 0 0;
+        padding: 28px 20px;
+        width: 100%;
+        max-width: 440px;
+        position: relative;
+        animation: slideUp 0.3s ease;
+        max-height: 85vh;
+        overflow-y: auto;
+      }
+      @media (min-width: 600px) {
+        .modal {
+          border-radius: 18px;
+          padding: 32px;
+        }
+      }
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .modal-close {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        background: none;
+        border: none;
+        color: #666;
+        font-size: 20px;
+        cursor: pointer;
+      }
+      .modal-close:hover {
+        color: #fff;
+      }
+      .modal h2 {
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        color: #00ffaa;
+      }
+      .form-group {
+        margin-bottom: 16px;
+      }
+      .form-group label {
+        display: block;
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 7px;
+      }
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 11px 14px;
+        background: #0f1117;
+        border: 1px solid #2a2d3a;
+        border-radius: 8px;
+        color: #f0f0f0;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+        font-family: inherit;
+      }
+      .form-group input:focus,
+      .form-group textarea:focus {
+        border-color: #00ffaa;
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+      .form-error {
+        color: #f87171;
+        font-size: 13px;
+        margin-bottom: 12px;
+        display: none;
+      }
+      .btn-save {
+        width: 100%;
+        padding: 13px;
+        background: #00ffaa;
+        color: #0a0e14;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+      .btn-save:hover {
+        background: #00cc88;
+        box-shadow: 0 0 20px #00ffaa40;
+      }
+
+      /* EDIT BUTTON */
+      .edit-btn-wrap {
+        display: flex;
+        justify-content: center;
+        margin: 16px 0 0;
+      }
+      .btn-edit {
+        padding: 9px 24px;
+        background: transparent;
+        color: #00ffaa;
+        border: 1px solid #00ffaa40;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 13px;
+        transition: all 0.2s;
+        font-family: inherit;
+      }
+      .btn-edit:hover {
+        background: #00ffaa15;
+        border-color: #00ffaa;
+        box-shadow: 0 0 14px #00ffaa20;
+      }
+
+      /* LOADING */
+      .loading-overlay {
+        position: fixed;
+        inset: 0;
+        background: #0a0e14;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .loading-overlay.hidden {
+        display: none;
+      }
+      .spinner {
+        width: 48px;
+        height: 48px;
+        border: 3px solid #1e2030;
+        border-top-color: #00ffaa;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* NOT LOGGED IN */
+      .not-logged {
+        text-align: center;
+        padding: 60px 20px;
+        color: #444;
+      }
+      .not-logged div {
+        font-size: 52px;
+        margin-bottom: 16px;
+      }
+      .not-logged p {
+        font-size: 15px;
+        margin-bottom: 20px;
+        color: #666;
+      }
+      .not-logged button {
+        padding: 12px 28px;
+        background: #00ffaa;
+        color: #0a0e14;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: inherit;
+      }
+
+      /* TOAST */
+      .toast {
+        display: none;
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #00ffaa;
+        color: #0a0e14;
+        padding: 12px 22px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 14px;
+        z-index: 9999;
+        width: max-content;
+        max-width: 90vw;
+      }
+      .toast.show {
+        display: block;
+        animation: fadeUp 0.3s ease;
+      }
+      .toast.red {
+        background: #f87171;
+        color: #fff;
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-links,
+        .nav-btns {
+          display: none;
+        }
+        .hamburger {
+          display: flex;
+        }
+      }
+      @media (min-width: 769px) {
+        .mobile-menu {
+          display: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav>
+      <a class="logo" href="index.html">⚽ ملاعب<span>نا</span></a>
+      <ul class="nav-links">
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="bookings.html">حجوزاتي</a></li>
+        <li><a href="ratings.html">التقييمات</a></li>
+        <li><a href="profile.html" class="active">البروفايل</a></li>
+      </ul>
+      <div class="nav-btns" id="navBtns"></div>
+      <button class="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">الرئيسية</a>
+      <a href="bookings.html">حجوزاتي</a>
+      <a href="ratings.html">التقييمات</a>
+      <a href="profile.html" class="active">البروفايل</a>
+      <div class="mob-btns" id="mobBtns"></div>
+    </div>
+
+    <!-- LOADING -->
+    <div class="loading-overlay" id="loadingOverlay">
+      <div class="spinner"></div>
+      <div style="color: #00ffaa; font-size: 14px">جاري التحميل...</div>
+    </div>
+
+    <!-- PAGE -->
+    <div class="page" id="mainPage" style="display: none">
+      <!-- NOT LOGGED IN STATE -->
+      <div class="not-logged" id="notLogged" style="display: none">
+        <div>🔒</div>
+        <p>لازم تسجل دخول الأول عشان تشوف بروفايلك</p>
+        <button onclick="window.location = 'index.html'">سجّل دخول</button>
+      </div>
+
+      <!-- PROFILE CARD -->
+      <div
+        id="cardWrap"
+        style="
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+        "
+      >
+        <div class="profile-card" id="profileCard">
+          <!-- Corner decorations -->
+          <div class="card-corner tl"></div>
+          <div class="card-corner tr"></div>
+          <div class="card-corner bl"></div>
+          <div class="card-corner br"></div>
+          <div class="card-deco"></div>
+
+          <div class="card-content">
+            <!-- AVATAR -->
+            <div class="avatar-section">
+              <label
+                class="avatar-ring"
+                for="avatarInput"
+                title="اضغط لتغيير الصورة"
+              >
+                <input
+                  type="file"
+                  id="avatarInput"
+                  accept="image/*"
+                  onchange="handleAvatar(this)"
+                />
+                <div class="avatar-inner" id="avatarInner">🧑</div>
+                <span class="avatar-edit-hint">تغيير الصورة</span>
+              </label>
+            </div>
+
+            <!-- NAME -->
+            <div class="player-name" id="playerName">—</div>
+
+            <!-- AGE -->
+            <div class="player-age" id="playerAge"></div>
+
+            <!-- BIO -->
+            <div class="player-bio" id="playerBio">لا يوجد وصف بعد</div>
+
+            <!-- ID -->
+            <div class="player-id" id="playerId"># ID: —</div>
+
+            <!-- DIVIDER -->
+            <div class="stats-divider"></div>
+
+            <!-- STATS -->
+            <div class="stats-row">
+              <div class="stat-item">
+                <div class="stat-icon">🏟️</div>
+                <div class="stat-num" id="statBookings">0</div>
+                <div class="stat-label">حجوزات</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-icon">🥇</div>
+                <div class="stat-num" id="statRating">—</div>
+                <div class="stat-label">التقييم</div>
+              </div>
+            </div>
+
+            <!-- SPARKLE -->
+            <div class="sparkle">✦</div>
+          </div>
+        </div>
+
+        <!-- EDIT BUTTON -->
+        <div class="edit-btn-wrap">
+          <button class="btn-edit" onclick="openEdit()">
+            ✏️ تعديل البروفايل
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT MODAL -->
+    <div class="modal-overlay" id="editModal">
+      <div class="modal">
+        <button class="modal-close" onclick="closeEdit()">✕</button>
+        <h2>✏️ تعديل البروفايل</h2>
+        <div class="form-error" id="editError"></div>
+
+        <div class="form-group">
+          <label>الاسم</label>
+          <input type="text" id="editName" placeholder="اسمك الكامل" />
+        </div>
+        <div class="form-group">
+          <label>العمر</label>
+          <input
+            type="number"
+            id="editAge"
+            placeholder="عمرك"
+            min="10"
+            max="60"
+          />
+        </div>
+        <div class="form-group">
+          <label>نبذة عنك</label>
+          <textarea
+            id="editBio"
+            placeholder="اكتب نبذة قصيرة عن نفسك كلاعب..."
+          ></textarea>
+        </div>
+
+        <button class="btn-save" onclick="saveProfile()">
+          💾 حفظ التغييرات
+        </button>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+      const API_URL = "https://malaabna-production.up.railway.app/api";
+
+      function getToken() {
+        return localStorage.getItem("token");
+      }
+      function getUser() {
+        const u = localStorage.getItem("user");
+        return u ? JSON.parse(u) : null;
+      }
+      function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        window.location = "index.html";
+      }
+      function toggleMenu() {
+        document.getElementById("mobileMenu").classList.toggle("open");
+      }
+
+      function renderNav() {
+        const user = getUser();
+        document.getElementById("navBtns").innerHTML = user
+          ? `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`
+          : `<button class="btn-outline" onclick="window.location='index.html'">دخول</button>
+           <button class="btn-green" onclick="window.location='index.html'">حساب جديد</button>`;
+        document.getElementById("mobBtns").innerHTML = user
+          ? `<button class="btn-outline" style="flex:1" onclick="logout()">خروج</button>`
+          : `<button class="btn-green" style="flex:1" onclick="window.location='index.html'">تسجيل دخول</button>`;
+      }
+
+      // ============================================
+      // تحميل البروفايل
+      // ============================================
+      async function loadProfile() {
+        const overlay = document.getElementById("loadingOverlay");
+        const mainPage = document.getElementById("mainPage");
+
+        if (!getToken()) {
+          overlay.classList.add("hidden");
+          mainPage.style.display = "flex";
+          document.getElementById("cardWrap").style.display = "none";
+          document.getElementById("notLogged").style.display = "block";
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API_URL}/auth/profile`, {
+            headers: { Authorization: "Bearer " + getToken() },
+          });
+          if (res.status === 401) {
+            logout();
+            return;
+          }
+          if (!res.ok) throw new Error();
+          const data = await res.json();
+          renderProfile(data);
+        } catch {
+          showToast("❌ تعذّر تحميل البروفايل", true);
+        } finally {
+          overlay.classList.add("hidden");
+          mainPage.style.display = "flex";
+        }
+      }
+
+      function renderProfile(data) {
+        document.getElementById("playerName").textContent =
+          data.name.toUpperCase();
+        document.getElementById("playerAge").textContent = data.age
+          ? data.age + " سنة"
+          : "";
+        document.getElementById("playerBio").textContent =
+          data.bio || "لا يوجد وصف بعد";
+        document.getElementById("playerId").textContent =
+          "# ID: " + String(data.id).padStart(4, "0");
+        document.getElementById("statBookings").textContent =
+          data._count?.bookings ?? 0;
+
+        // جيب متوسط التقييم
+        loadRating(data.id);
+
+        // ملء حقول التعديل
+        document.getElementById("editName").value = data.name || "";
+        document.getElementById("editAge").value = data.age || "";
+        document.getElementById("editBio").value = data.bio || "";
+
+        // صورة محفوظة
+        const savedAvatar = localStorage.getItem("avatar_" + data.id);
+        if (savedAvatar) {
+          document.getElementById("avatarInner").innerHTML =
+            `<img src="${savedAvatar}" alt="صورة البروفايل"/>`;
+        }
+      }
+
+      async function loadRating(userId) {
+        try {
+          const res = await fetch(`${API_URL}/ratings/${userId}`);
+          if (!res.ok) return;
+          const data = await res.json();
+          document.getElementById("statRating").textContent =
+            data.total > 0 ? data.average : "—";
+        } catch {}
+      }
+
+      // ============================================
+      // الصورة الشخصية (محلية في localStorage)
+      // ============================================
+      function handleAvatar(input) {
+        const file = input.files[0];
+        if (!file) return;
+        if (file.size > 2 * 1024 * 1024) {
+          showToast("⚠️ الصورة أكبر من 2MB", true);
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const dataUrl = e.target.result;
+          document.getElementById("avatarInner").innerHTML =
+            `<img src="${dataUrl}" alt="صورة البروفايل"/>`;
+          const userId = getUser()?.id;
+          if (userId) localStorage.setItem("avatar_" + userId, dataUrl);
+          showToast("✅ تم تحديث الصورة!", false);
+        };
+        reader.readAsDataURL(file);
+      }
+
+      // ============================================
+      // تعديل البروفايل
+      // ============================================
+      function openEdit() {
+        document.getElementById("editError").style.display = "none";
+        document.getElementById("editModal").classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+      function closeEdit() {
+        document.getElementById("editModal").classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      async function saveProfile() {
+        const errEl = document.getElementById("editError");
+        errEl.style.display = "none";
+
+        const name = document.getElementById("editName").value.trim();
+        const age = document.getElementById("editAge").value;
+        const bio = document.getElementById("editBio").value.trim();
+
+        if (!name) {
+          errEl.textContent = "⚠️ الاسم مطلوب";
+          errEl.style.display = "block";
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API_URL}/auth/profile`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: "Bearer " + getToken(),
+            },
+            body: JSON.stringify({
+              name,
+              age: age ? parseInt(age) : null,
+              bio,
+            }),
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            errEl.textContent = "⚠️ " + (data.error || "خطأ");
+            errEl.style.display = "block";
+            return;
+          }
+
+          // حدّث الـ localStorage
+          const user = getUser();
+          localStorage.setItem(
+            "user",
+            JSON.stringify({ ...user, name: data.user.name }),
+          );
+          renderNav();
+
+          // حدّث الكارت
+          document.getElementById("playerName").textContent =
+            data.user.name.toUpperCase();
+          document.getElementById("playerAge").textContent = data.user.age
+            ? data.user.age + " سنة"
+            : "";
+          document.getElementById("playerBio").textContent =
+            data.user.bio || "لا يوجد وصف بعد";
+
+          closeEdit();
+          showToast("✅ تم تحديث البروفايل!", false);
+        } catch {
+          errEl.textContent = "❌ تعذّر الاتصال";
+          errEl.style.display = "block";
+        }
+      }
+
+      document
+        .getElementById("editModal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeEdit();
+        });
+
+      // ============================================
+      // Toast
+      // ============================================
+      function showToast(msg, isRed) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.className = "toast show" + (isRed ? " red" : "");
+        setTimeout(() => t.classList.remove("show"), 3500);
+      }
+
+      // ============================================
+      // Init
+      // ============================================
+      renderNav();
+      loadProfile();
+    </script>
+  </body>
+</html>
