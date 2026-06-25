@@ -1,0 +1,6 @@
+-- AlterTable
+ALTER TABLE "Booking" ADD COLUMN     "endTime" TEXT NOT NULL DEFAULT '00:00';
+
+-- AlterTable
+ALTER TABLE "Field" ADD COLUMN     "closeTime" INTEGER NOT NULL DEFAULT 24,
+ADD COLUMN     "openTime" INTEGER NOT NULL DEFAULT 8;

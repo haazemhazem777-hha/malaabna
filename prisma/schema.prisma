@@ -22,34 +22,37 @@ model User {
 }
 
 model Field {
-  id       Int       @id @default(autoincrement())
-  name     String
-  location String
-  type     String
-  surface  String
-  price    Int
-  emoji    String    @default("🏟️")
-  mapUrl   String?
+  id        Int       @id @default(autoincrement())
+  name      String
+  location  String
+  type      String
+  surface   String
+  price     Int
+  emoji     String    @default("🏟️")
+  mapUrl    String?
+  openTime  Int       @default(8)   // ساعة الفتح (8 = 8 صباحاً)
+  closeTime Int       @default(24)  // ساعة الإغلاق (24 = منتصف الليل)
 
-  bookings Booking[]
+  bookings  Booking[]
 }
 
 model Booking {
   id        Int      @id @default(autoincrement())
   date      String
   time      String
-  duration  Int      @default(1)
+  duration  Int      @default(1)   // عدد الساعات
+  endTime   String   @default("00:00")                // وقت الانتهاء (هنحسبه تلقائي)
   price     Int
   status    String   @default("upcoming")
   createdAt DateTime @default(now())
 
-  userId  Int
-  user    User    @relation(fields: [userId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
 
-  fieldId Int
-  field   Field   @relation(fields: [fieldId], references: [id])
+  fieldId   Int
+  field     Field    @relation(fields: [fieldId], references: [id])
 
-  ratings Rating[]
+  ratings   Rating[]
 }
 
 model Rating {

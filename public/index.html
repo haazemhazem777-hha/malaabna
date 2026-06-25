@@ -10,14 +10,12 @@
         padding: 0;
         box-sizing: border-box;
       }
-
       body {
         font-family: "Segoe UI", Tahoma, sans-serif;
         background: #0f1117;
         color: #f0f0f0;
       }
 
-      /* ===== NAVBAR ===== */
       nav {
         display: flex;
         justify-content: space-between;
@@ -38,8 +36,6 @@
       .logo span {
         color: #fff;
       }
-
-      /* Desktop nav */
       .nav-links {
         list-style: none;
         display: flex;
@@ -55,7 +51,6 @@
       .nav-links li a.active {
         color: #4ade80;
       }
-
       .nav-btns {
         display: flex;
         gap: 10px;
@@ -69,7 +64,6 @@
         background: transparent;
         cursor: pointer;
         font-size: 13px;
-        white-space: nowrap;
       }
       .btn-green {
         padding: 7px 16px;
@@ -80,7 +74,6 @@
         cursor: pointer;
         font-size: 13px;
         font-weight: 600;
-        white-space: nowrap;
       }
       .user-chip {
         display: flex;
@@ -91,13 +84,10 @@
         border-radius: 20px;
         font-size: 13px;
         cursor: pointer;
-        white-space: nowrap;
       }
       .user-chip:hover {
         background: #2a2d3a;
       }
-
-      /* Hamburger */
       .hamburger {
         display: none;
         flex-direction: column;
@@ -113,14 +103,10 @@
         height: 2px;
         background: #f0f0f0;
         border-radius: 2px;
-        transition: all 0.3s;
       }
-
-      /* Mobile menu */
       .mobile-menu {
         display: none;
         flex-direction: column;
-        gap: 0;
         background: #161820;
         border-bottom: 1px solid #2a2d3a;
         position: sticky;
@@ -137,15 +123,13 @@
         font-size: 15px;
         border-bottom: 1px solid #1e2030;
       }
-      .mobile-menu a:hover,
       .mobile-menu a.active {
         color: #4ade80;
-        background: #4ade8008;
       }
       .mobile-menu .mob-btns {
+        padding: 14px 24px;
         display: flex;
         gap: 10px;
-        padding: 14px 24px;
       }
       .mobile-menu .mob-btns button {
         flex: 1;
@@ -153,9 +137,9 @@
         border-radius: 8px;
         font-size: 14px;
         cursor: pointer;
+        font-family: inherit;
       }
 
-      /* ===== HERO ===== */
       .hero {
         text-align: center;
         padding: 70px 20px 60px;
@@ -224,7 +208,6 @@
         color: #4ade80;
       }
 
-      /* ===== FIELDS ===== */
       .fields-section {
         padding: 50px 20px;
       }
@@ -238,7 +221,6 @@
         font-size: clamp(20px, 4vw, 28px);
         font-weight: 700;
       }
-
       .fields-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -296,6 +278,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        margin-bottom: 12px;
       }
       .price {
         font-size: 17px;
@@ -307,6 +290,10 @@
         color: #666;
         font-weight: 400;
       }
+      .field-hours {
+        font-size: 11px;
+        color: #666;
+      }
       .map-link {
         font-size: 12px;
         color: #4ade80;
@@ -314,7 +301,6 @@
       }
       .btn-book {
         width: 100%;
-        margin-top: 12px;
         padding: 10px;
         background: #4ade8015;
         color: #4ade80;
@@ -332,8 +318,7 @@
       }
 
       .loading-msg,
-      .error-msg,
-      .empty-msg {
+      .error-msg {
         text-align: center;
         padding: 40px;
         color: #666;
@@ -345,18 +330,18 @@
 
       footer {
         text-align: center;
-        padding: 24px 20px;
+        padding: 24px;
         border-top: 1px solid #1e2030;
         color: #444;
         font-size: 13px;
       }
 
-      /* ===== MODAL ===== */
+      /* ===== BOOKING MODAL ===== */
       .modal-overlay {
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.8);
+        background: rgba(0, 0, 0, 0.85);
         z-index: 999;
         align-items: flex-end;
         justify-content: center;
@@ -373,18 +358,18 @@
         background: #161820;
         border: 1px solid #2a2d3a;
         border-radius: 18px 18px 0 0;
-        padding: 28px 20px;
+        padding: 24px 20px;
         width: 100%;
-        max-width: 480px;
+        max-width: 500px;
         position: relative;
         animation: slideUp 0.3s ease;
-        max-height: 90vh;
+        max-height: 92vh;
         overflow-y: auto;
       }
       @media (min-width: 600px) {
         .modal {
           border-radius: 18px;
-          padding: 32px;
+          padding: 30px;
         }
       }
       @keyframes slideUp {
@@ -410,26 +395,30 @@
       .modal-close:hover {
         color: #fff;
       }
-      .modal h2 {
+      .modal-title {
         font-size: 18px;
         font-weight: 700;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
       }
-      .modal-field-name {
+      .modal-subtitle {
         color: #4ade80;
         font-size: 13px;
         margin-bottom: 20px;
       }
+
+      /* DATE */
       .form-group {
-        margin-bottom: 16px;
+        margin-bottom: 20px;
       }
       .form-group label {
         display: block;
         font-size: 12px;
         color: #888;
-        margin-bottom: 7px;
+        margin-bottom: 8px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
       }
-      .form-group input {
+      .form-group input[type="date"] {
         width: 100%;
         padding: 11px 14px;
         background: #0f1117;
@@ -438,56 +427,204 @@
         color: #f0f0f0;
         font-size: 14px;
         outline: none;
-        transition: border-color 0.2s;
         font-family: inherit;
+        transition: border-color 0.2s;
       }
-      .form-group input:focus {
+      .form-group input[type="date"]:focus {
         border-color: #4ade80;
       }
-      .time-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 7px;
+
+      /* DURATION */
+      .duration-row {
+        display: flex;
+        gap: 8px;
       }
-      @media (max-width: 380px) {
-        .time-grid {
-          grid-template-columns: repeat(3, 1fr);
-        }
-      }
-      .time-slot {
-        padding: 8px 4px;
-        text-align: center;
-        border-radius: 7px;
+      .dur-btn {
+        flex: 1;
+        padding: 10px 8px;
         border: 1px solid #2a2d3a;
         background: #0f1117;
-        cursor: pointer;
-        font-size: 12px;
         color: #888;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 13px;
+        font-family: inherit;
         transition: all 0.2s;
+        text-align: center;
       }
-      .time-slot:hover {
+      .dur-btn:hover {
         border-color: #4ade80;
         color: #4ade80;
       }
-      .time-slot.selected {
-        background: #4ade80;
-        color: #0f1117;
+      .dur-btn.active {
+        background: #4ade8015;
         border-color: #4ade80;
+        color: #4ade80;
+        font-weight: 700;
+      }
+
+      /* TIME SLOTS */
+      .slots-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+      .slots-header label {
+        font-size: 12px;
+        color: #888;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      .slots-legend {
+        display: flex;
+        gap: 12px;
+      }
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        color: #666;
+      }
+      .legend-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+      .legend-dot.green {
+        background: #4ade80;
+      }
+      .legend-dot.red {
+        background: #f87171;
+      }
+      .legend-dot.gray {
+        background: #2a2d3a;
+      }
+
+      .slots-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        margin-bottom: 6px;
+      }
+      @media (max-width: 380px) {
+        .slots-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      .slot-btn {
+        padding: 10px 4px;
+        text-align: center;
+        border-radius: 8px;
+        font-size: 12px;
+        font-family: inherit;
+        cursor: pointer;
+        transition: all 0.2s;
+        border: 1px solid transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+      .slot-btn .slot-time {
+        font-size: 12px;
         font-weight: 600;
       }
-      .modal-summary {
+      .slot-btn .slot-status {
+        font-size: 9px;
+      }
+
+      /* Available */
+      .slot-btn.available {
+        background: #4ade8010;
+        border-color: #4ade8030;
+        color: #4ade80;
+      }
+      .slot-btn.available:hover {
+        background: #4ade8025;
+        border-color: #4ade80;
+      }
+
+      /* Selected */
+      .slot-btn.selected {
+        background: #4ade80;
+        border-color: #4ade80;
+        color: #0f1117;
+      }
+      .slot-btn.selected .slot-status {
+        color: #0a2a15;
+      }
+
+      /* In range (ساعات متتالية) */
+      .slot-btn.in-range {
+        background: #4ade8030;
+        border-color: #4ade8060;
+        color: #4ade80;
+      }
+
+      /* Booked */
+      .slot-btn.booked {
+        background: #f8717110;
+        border-color: #f8717130;
+        color: #f87171;
+        cursor: not-allowed;
+      }
+
+      /* Past */
+      .slot-btn.past {
+        background: #1e2030;
+        border-color: #2a2d3a;
+        color: #3a3d4a;
+        cursor: not-allowed;
+      }
+
+      /* Slots loading */
+      .slots-loading {
+        text-align: center;
+        padding: 20px;
+        color: #666;
+        font-size: 13px;
+      }
+
+      /* SUMMARY */
+      .booking-summary {
         background: #0f1117;
         border: 1px solid #2a2d3a;
         border-radius: 10px;
-        padding: 12px 14px;
+        padding: 14px 16px;
         margin: 16px 0;
         font-size: 13px;
+        display: none;
+      }
+      .summary-row-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+        border-bottom: 1px solid #1e2030;
+      }
+      .summary-row-item:last-child {
+        border-bottom: none;
+        font-weight: 700;
+        color: #4ade80;
+        font-size: 14px;
+      }
+      .summary-row-item .s-label {
         color: #888;
-        line-height: 2;
       }
-      .modal-summary strong {
-        color: #f0f0f0;
+
+      .form-error {
+        color: #f87171;
+        font-size: 13px;
+        margin-bottom: 12px;
+        display: none;
+        padding: 10px 14px;
+        background: #f8717110;
+        border-radius: 8px;
+        border: 1px solid #f8717130;
       }
+
       .btn-confirm {
         width: 100%;
         padding: 13px;
@@ -508,14 +645,8 @@
         opacity: 0.4;
         cursor: not-allowed;
       }
-      .form-error {
-        color: #f87171;
-        font-size: 13px;
-        margin-bottom: 12px;
-        display: none;
-      }
 
-      /* ===== LOGIN MODAL ===== */
+      /* LOGIN MODAL */
       .login-tabs {
         display: flex;
         margin-bottom: 20px;
@@ -538,17 +669,40 @@
         color: #4ade80;
         border-bottom-color: #4ade80;
       }
+      .login-form-group {
+        margin-bottom: 16px;
+      }
+      .login-form-group label {
+        display: block;
+        font-size: 12px;
+        color: #888;
+        margin-bottom: 7px;
+      }
+      .login-form-group input {
+        width: 100%;
+        padding: 11px 14px;
+        background: #0f1117;
+        border: 1px solid #2a2d3a;
+        border-radius: 8px;
+        color: #f0f0f0;
+        font-size: 14px;
+        outline: none;
+        transition: border-color 0.2s;
+        font-family: inherit;
+      }
+      .login-form-group input:focus {
+        border-color: #4ade80;
+      }
 
-      /* ===== TOAST ===== */
       .toast {
         display: none;
         position: fixed;
-        bottom: 24px;
+        bottom: 20px;
         left: 50%;
         transform: translateX(-50%);
         background: #4ade80;
         color: #0f1117;
-        padding: 12px 24px;
+        padding: 12px 22px;
         border-radius: 12px;
         font-weight: 700;
         font-size: 14px;
@@ -568,7 +722,7 @@
       @keyframes fadeUp {
         from {
           opacity: 0;
-          transform: translateX(-50%) translateY(16px);
+          transform: translateX(-50%) translateY(14px);
         }
         to {
           opacity: 1;
@@ -576,7 +730,6 @@
         }
       }
 
-      /* ===== RESPONSIVE ===== */
       @media (max-width: 768px) {
         .nav-links,
         .nav-btns {
@@ -585,14 +738,7 @@
         .hamburger {
           display: flex;
         }
-        .hero {
-          padding: 50px 16px 40px;
-        }
-        .fields-section {
-          padding: 36px 16px;
-        }
       }
-
       @media (min-width: 769px) {
         .mobile-menu {
           display: none !important;
@@ -601,31 +747,28 @@
     </style>
   </head>
   <body>
-    <!-- NAVBAR -->
     <nav>
       <a class="logo" href="index.html">⚽ ملاعب<span>نا</span></a>
       <ul class="nav-links">
         <li><a href="index.html" class="active">الرئيسية</a></li>
-        <li><a href="profile.html">البروفايل</a></li>
         <li><a href="bookings.html">حجوزاتي</a></li>
         <li><a href="ratings.html">التقييمات</a></li>
+        <li><a href="profile.html">البروفايل</a></li>
       </ul>
       <div class="nav-btns" id="navBtns"></div>
-      <button class="hamburger" onclick="toggleMenu()" aria-label="القائمة">
+      <button class="hamburger" onclick="toggleMenu()">
         <span></span><span></span><span></span>
       </button>
     </nav>
 
-    <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
       <a href="index.html" class="active">الرئيسية</a>
-      <a href="profile.html">البروفايل</a>
       <a href="bookings.html">حجوزاتي</a>
       <a href="ratings.html">التقييمات</a>
+      <a href="profile.html">البروفايل</a>
       <div class="mob-btns" id="mobBtns"></div>
     </div>
 
-    <!-- HERO -->
     <section class="hero">
       <div class="hero-badge">🏆 أكبر منصة حجز ملاعب في مصر</div>
       <h1>احجز ملعبك<br /><span>في ثوانٍ</span></h1>
@@ -640,11 +783,8 @@
       </div>
     </section>
 
-    <!-- FIELDS -->
     <section class="fields-section" id="fields-section">
-      <div class="section-header">
-        <h2>الملاعب المتاحة</h2>
-      </div>
+      <div class="section-header"><h2>الملاعب المتاحة</h2></div>
       <div class="fields-grid" id="fieldsGrid">
         <div class="loading-msg">⏳ جاري تحميل الملاعب...</div>
       </div>
@@ -656,23 +796,84 @@
     <div class="modal-overlay" id="bookingModal">
       <div class="modal">
         <button class="modal-close" onclick="closeBooking()">✕</button>
-        <h2>📅 احجز ملعبك</h2>
-        <div class="modal-field-name" id="modalFieldName"></div>
+        <div class="modal-title">📅 احجز ملعبك</div>
+        <div class="modal-subtitle" id="modalFieldName"></div>
+
         <div class="form-error" id="bookingError"></div>
+
+        <!-- DATE -->
         <div class="form-group">
-          <label>اختار التاريخ</label>
-          <input type="date" id="bookingDate" />
+          <label>📆 اختار التاريخ</label>
+          <input type="date" id="bookingDate" onchange="onDateChange()" />
         </div>
+
+        <!-- DURATION -->
         <div class="form-group">
-          <label>اختار الوقت</label>
-          <div class="time-grid" id="timeGrid"></div>
+          <label>⏱ عدد الساعات</label>
+          <div class="duration-row" id="durationRow">
+            <button class="dur-btn active" onclick="setDuration(1, this)">
+              ساعة
+            </button>
+            <button class="dur-btn" onclick="setDuration(2, this)">
+              ساعتين
+            </button>
+            <button class="dur-btn" onclick="setDuration(3, this)">
+              3 ساعات
+            </button>
+            <button class="dur-btn" onclick="setDuration(4, this)">
+              4 ساعات
+            </button>
+          </div>
         </div>
-        <div class="modal-summary" id="bookingSummary" style="display: none">
-          📍 الملعب: <strong id="sumField"></strong><br />
-          📅 التاريخ: <strong id="sumDate"></strong><br />
-          🕐 الوقت: <strong id="sumTime"></strong><br />
-          💰 السعر: <strong id="sumPrice"></strong>
+
+        <!-- TIME SLOTS -->
+        <div class="form-group">
+          <div class="slots-header">
+            <label>🕐 اختار وقت البداية</label>
+            <div class="slots-legend">
+              <div class="legend-item">
+                <div class="legend-dot green"></div>
+                متاح
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot red"></div>
+                محجوز
+              </div>
+              <div class="legend-item">
+                <div class="legend-dot gray"></div>
+                مش متاح
+              </div>
+            </div>
+          </div>
+          <div class="slots-grid" id="slotsGrid">
+            <div class="slots-loading">اختار التاريخ الأول</div>
+          </div>
         </div>
+
+        <!-- SUMMARY -->
+        <div class="booking-summary" id="bookingSummary">
+          <div class="summary-row-item">
+            <span class="s-label">الملعب</span>
+            <span id="sumField"></span>
+          </div>
+          <div class="summary-row-item">
+            <span class="s-label">التاريخ</span>
+            <span id="sumDate"></span>
+          </div>
+          <div class="summary-row-item">
+            <span class="s-label">من</span>
+            <span id="sumFrom"></span>
+          </div>
+          <div class="summary-row-item">
+            <span class="s-label">لـ</span>
+            <span id="sumTo"></span>
+          </div>
+          <div class="summary-row-item">
+            <span class="s-label">💰 الإجمالي</span>
+            <span id="sumPrice"></span>
+          </div>
+        </div>
+
         <button
           class="btn-confirm"
           id="confirmBtn"
@@ -698,7 +899,7 @@
         </div>
         <div class="form-error" id="authError"></div>
         <div id="loginForm">
-          <div class="form-group">
+          <div class="login-form-group">
             <label>البريد الإلكتروني</label
             ><input
               type="email"
@@ -706,18 +907,18 @@
               placeholder="example@email.com"
             />
           </div>
-          <div class="form-group">
+          <div class="login-form-group">
             <label>كلمة المرور</label
             ><input type="password" id="loginPassword" placeholder="••••••••" />
           </div>
           <button class="btn-confirm" onclick="doLogin()">دخول</button>
         </div>
         <div id="registerForm" style="display: none">
-          <div class="form-group">
+          <div class="login-form-group">
             <label>الاسم</label
             ><input type="text" id="registerName" placeholder="اسمك الكامل" />
           </div>
-          <div class="form-group">
+          <div class="login-form-group">
             <label>البريد الإلكتروني</label
             ><input
               type="email"
@@ -725,7 +926,7 @@
               placeholder="example@email.com"
             />
           </div>
-          <div class="form-group">
+          <div class="login-form-group">
             <label>كلمة المرور</label
             ><input
               type="password"
@@ -746,25 +947,14 @@
       const API_URL = "https://malaabna-production.up.railway.app/api";
 
       let fields = [];
-      let selectedTime = null;
       let currentField = null;
-      const allSlots = [
-        "08:00",
-        "09:00",
-        "10:00",
-        "11:00",
-        "12:00",
-        "13:00",
-        "14:00",
-        "15:00",
-        "16:00",
-        "17:00",
-        "18:00",
-        "19:00",
-        "20:00",
-        "21:00",
-      ];
+      let selectedSlot = null;
+      let duration = 1;
+      let allSlots = [];
 
+      // ============================================
+      // Auth
+      // ============================================
       function getToken() {
         return localStorage.getItem("token");
       }
@@ -782,25 +972,23 @@
         renderNav();
         showToast("👋 تم تسجيل الخروج", false);
       }
-
-      function renderNav() {
-        const user = getUser();
-        const btns = `${
-          user
-            ? `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`
-            : `<button class="btn-outline" onclick="openLogin()">دخول</button><button class="btn-green" onclick="openLogin()">حساب جديد</button>`
-        }`;
-        document.getElementById("navBtns").innerHTML = btns;
-        document.getElementById("mobBtns").innerHTML = user
-          ? `<button class="btn-outline" style="flex:1" onclick="logout()">خروج</button>`
-          : `<button class="btn-outline" style="border-color:#4ade80;color:#4ade80" onclick="openLogin();toggleMenu()">دخول</button>
-           <button class="btn-green" onclick="openLogin();toggleMenu()">حساب جديد</button>`;
-      }
-
       function toggleMenu() {
         document.getElementById("mobileMenu").classList.toggle("open");
       }
 
+      function renderNav() {
+        const user = getUser();
+        document.getElementById("navBtns").innerHTML = user
+          ? `<div class="user-chip" onclick="logout()">👤 ${user.name} (خروج)</div>`
+          : `<button class="btn-outline" onclick="openLogin()">دخول</button><button class="btn-green" onclick="openLogin()">حساب جديد</button>`;
+        document.getElementById("mobBtns").innerHTML = user
+          ? `<button class="btn-outline" style="flex:1" onclick="logout()">خروج</button>`
+          : `<button class="btn-green" style="flex:1" onclick="openLogin();toggleMenu()">تسجيل دخول</button>`;
+      }
+
+      // ============================================
+      // Fields
+      // ============================================
       async function loadFields() {
         const grid = document.getElementById("fieldsGrid");
         try {
@@ -808,7 +996,7 @@
           if (!res.ok) throw new Error();
           fields = await res.json();
           if (!fields.length) {
-            grid.innerHTML = '<div class="empty-msg">مفيش ملاعب متاحة</div>';
+            grid.innerHTML = '<div class="loading-msg">مفيش ملاعب متاحة</div>';
             return;
           }
           grid.innerHTML = fields
@@ -827,7 +1015,8 @@
                 <div class="price">${f.price} جنيه <span>/ ساعة</span></div>
                 ${f.mapUrl ? `<a class="map-link" href="${f.mapUrl}" target="_blank">📍 الموقع</a>` : ""}
               </div>
-              <button class="btn-book" onclick="openBooking(${f.id})">احجز الآن</button>
+              <div class="field-hours">🕐 يفتح ${f.openTime}:00 — يقفل ${f.closeTime}:00</div>
+              <button class="btn-book" style="margin-top:12px" onclick="openBooking(${f.id})">احجز الآن</button>
             </div>
           </div>`,
             )
@@ -844,6 +1033,9 @@
           .scrollIntoView({ behavior: "smooth" });
       }
 
+      // ============================================
+      // Booking Modal
+      // ============================================
       function openBooking(fieldId) {
         if (!getToken()) {
           showToast("⚠️ سجّل دخول الأول", true);
@@ -851,61 +1043,189 @@
           return;
         }
         currentField = fields.find((f) => f.id === fieldId);
-        selectedTime = null;
+        selectedSlot = null;
+        duration = 1;
+
         document.getElementById("modalFieldName").textContent =
-          "📍 " + currentField.name + " - " + currentField.location;
-        document.getElementById("bookingSummary").style.display = "none";
+          `📍 ${currentField.name} — ${currentField.location}`;
         document.getElementById("bookingError").style.display = "none";
+        document.getElementById("bookingSummary").style.display = "none";
         document.getElementById("confirmBtn").disabled = true;
-        const grid = document.getElementById("timeGrid");
-        grid.innerHTML = allSlots
-          .map(
-            (s) =>
-              `<div class="time-slot" onclick="selectTime('${s}',this)">${s}</div>`,
-          )
-          .join("");
+        document.getElementById("slotsGrid").innerHTML =
+          '<div class="slots-loading">اختار التاريخ الأول</div>';
+
+        // reset duration buttons
+        document
+          .querySelectorAll(".dur-btn")
+          .forEach((b, i) => b.classList.toggle("active", i === 0));
+
+        // set date
+        const today = new Date().toISOString().split("T")[0];
+        const dateInput = document.getElementById("bookingDate");
+        dateInput.min = today;
+        dateInput.value = today;
+
         document.getElementById("bookingModal").classList.add("active");
         document.body.style.overflow = "hidden";
+
+        // حمّل الـ slots تلقائي
+        loadSlots();
       }
+
       function closeBooking() {
         document.getElementById("bookingModal").classList.remove("active");
         document.body.style.overflow = "";
       }
 
-      function selectTime(slot, el) {
+      // ============================================
+      // Duration
+      // ============================================
+      function setDuration(val, btn) {
+        duration = val;
+        selectedSlot = null;
         document
-          .querySelectorAll(".time-slot")
-          .forEach((s) => s.classList.remove("selected"));
-        el.classList.add("selected");
-        selectedTime = slot;
+          .querySelectorAll(".dur-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        document.getElementById("bookingSummary").style.display = "none";
+        document.getElementById("confirmBtn").disabled = true;
+        renderSlots(); // إعادة رسم الـ slots مع الـ duration الجديد
+      }
+
+      // ============================================
+      // Date Change
+      // ============================================
+      function onDateChange() {
+        selectedSlot = null;
+        document.getElementById("bookingSummary").style.display = "none";
+        document.getElementById("confirmBtn").disabled = true;
+        loadSlots();
+      }
+
+      // ============================================
+      // Load Slots من الباك إند
+      // ============================================
+      async function loadSlots() {
+        const date = document.getElementById("bookingDate").value;
+        if (!date || !currentField) return;
+
+        document.getElementById("slotsGrid").innerHTML =
+          '<div class="slots-loading">⏳ جاري تحميل المواعيد...</div>';
+
+        try {
+          const res = await fetch(
+            `${API_URL}/bookings/slots/${currentField.id}?date=${date}`,
+          );
+          if (!res.ok) throw new Error();
+          const data = await res.json();
+          allSlots = data.slots;
+          renderSlots();
+        } catch {
+          document.getElementById("slotsGrid").innerHTML =
+            '<div class="slots-loading" style="color:#f87171">❌ تعذّر تحميل المواعيد</div>';
+        }
+      }
+
+      // ============================================
+      // Render Slots
+      // ============================================
+      function renderSlots() {
+        const grid = document.getElementById("slotsGrid");
+        if (!allSlots.length) {
+          grid.innerHTML = '<div class="slots-loading">مفيش مواعيد متاحة</div>';
+          return;
+        }
+
+        grid.innerHTML = allSlots
+          .map((slot) => {
+            // تحقق لو الـ duration المطلوب متاح ابتداءً من الـ slot ده
+            let canSelect = slot.available;
+            if (canSelect && duration > 1) {
+              const startIdx = allSlots.indexOf(slot);
+              for (let i = 0; i < duration; i++) {
+                const s = allSlots[startIdx + i];
+                if (!s || !s.available) {
+                  canSelect = false;
+                  break;
+                }
+              }
+            }
+
+            // تحديد الحالة
+            let cls = "slot-btn ";
+            let statusText = "";
+            if (slot.past) {
+              cls += "past";
+              statusText = "انتهى";
+            } else if (slot.booked) {
+              cls += "booked";
+              statusText = "محجوز";
+            } else if (!canSelect) {
+              cls += "past";
+              statusText = "مش كافي";
+            } else if (
+              selectedSlot &&
+              slot.time >= selectedSlot &&
+              slot.time < calcEnd(selectedSlot, duration)
+            ) {
+              cls += slot.time === selectedSlot ? "selected" : "in-range";
+              statusText = slot.time === selectedSlot ? "مختار" : "←";
+            } else {
+              cls += "available";
+              statusText = "🟢";
+            }
+
+            const disabled =
+              slot.past || slot.booked || (!canSelect && cls.includes("past"));
+            return `<button class="${cls}" ${disabled ? "disabled" : ""} onclick="selectSlot('${slot.time}')">
+          <span class="slot-time">${slot.time}</span>
+          <span class="slot-status">${statusText}</span>
+        </button>`;
+          })
+          .join("");
+      }
+
+      function calcEnd(startTime, dur) {
+        const [h] = startTime.split(":").map(Number);
+        return `${String(h + dur).padStart(2, "0")}:00`;
+      }
+
+      // ============================================
+      // Select Slot
+      // ============================================
+      function selectSlot(time) {
+        selectedSlot = time;
+        renderSlots();
         updateSummary();
       }
+
       function updateSummary() {
-        if (!selectedTime || !currentField) return;
-        const dateVal = document.getElementById("bookingDate").value;
-        const dateFormatted = new Date(
-          dateVal + "T00:00:00",
-        ).toLocaleDateString("ar-EG", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        });
+        if (!selectedSlot || !currentField) return;
+        const date = document.getElementById("bookingDate").value;
+        const endTime = calcEnd(selectedSlot, duration);
+        const totalPrice = currentField.price * duration;
+        const dateFormat = new Date(date + "T00:00:00").toLocaleDateString(
+          "ar-EG",
+          { weekday: "long", year: "numeric", month: "long", day: "numeric" },
+        );
+
         document.getElementById("sumField").textContent = currentField.name;
-        document.getElementById("sumDate").textContent = dateFormatted;
-        document.getElementById("sumTime").textContent = selectedTime;
-        document.getElementById("sumPrice").textContent =
-          currentField.price + " جنيه";
+        document.getElementById("sumDate").textContent = dateFormat;
+        document.getElementById("sumFrom").textContent = selectedSlot;
+        document.getElementById("sumTo").textContent = endTime;
+        document.getElementById("sumPrice").textContent = totalPrice + " جنيه";
+
         document.getElementById("bookingSummary").style.display = "block";
         document.getElementById("confirmBtn").disabled = false;
       }
-      document.getElementById("bookingDate").addEventListener("change", () => {
-        if (selectedTime) updateSummary();
-      });
 
+      // ============================================
+      // Confirm Booking
+      // ============================================
       async function confirmBooking() {
         const errEl = document.getElementById("bookingError");
         errEl.style.display = "none";
+
         try {
           const res = await fetch(`${API_URL}/bookings`, {
             method: "POST",
@@ -916,9 +1236,9 @@
             body: JSON.stringify({
               fieldId: currentField.id,
               date: document.getElementById("bookingDate").value,
-              time: selectedTime,
-              duration: 1,
-              price: currentField.price,
+              time: selectedSlot,
+              duration,
+              price: currentField.price * duration,
             }),
           });
           const data = await res.json();
@@ -929,7 +1249,7 @@
           }
           closeBooking();
           showToast(
-            "✅ تم الحجز! " + selectedTime + " في " + currentField.name,
+            `✅ تم الحجز! من ${selectedSlot} لـ ${calcEnd(selectedSlot, duration)} في ${currentField.name}`,
             false,
           );
         } catch {
@@ -938,6 +1258,9 @@
         }
       }
 
+      // ============================================
+      // Login
+      // ============================================
       function openLogin() {
         document.getElementById("authError").style.display = "none";
         document.getElementById("loginModal").classList.add("active");
@@ -963,6 +1286,37 @@
         document.getElementById("authError").style.display = "none";
       }
 
+      async function doLogin() {
+        const errEl = document.getElementById("authError");
+        const email = document.getElementById("loginEmail").value.trim();
+        const password = document.getElementById("loginPassword").value;
+        if (!email || !password) {
+          errEl.textContent = "⚠️ كل الحقول مطلوبة";
+          errEl.style.display = "block";
+          return;
+        }
+        try {
+          const res = await fetch(`${API_URL}/auth/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await res.json();
+          if (!res.ok) {
+            errEl.textContent = "⚠️ " + (data.error || "خطأ");
+            errEl.style.display = "block";
+            return;
+          }
+          saveAuth(data.token, data.user);
+          renderNav();
+          closeLogin();
+          showToast("👋 أهلاً " + data.user.name + "!", false);
+        } catch {
+          errEl.textContent = "❌ تعذّر الاتصال";
+          errEl.style.display = "block";
+        }
+      }
+
       async function doRegister() {
         const errEl = document.getElementById("authError");
         const name = document.getElementById("registerName").value.trim();
@@ -981,7 +1335,7 @@
           });
           const data = await res.json();
           if (!res.ok) {
-            errEl.textContent = "⚠️ " + (data.error || "حصل خطأ");
+            errEl.textContent = "⚠️ " + (data.error || "خطأ");
             errEl.style.display = "block";
             return;
           }
@@ -993,42 +1347,14 @@
         }
       }
 
-      async function doLogin() {
-        const errEl = document.getElementById("authError");
-        const email = document.getElementById("loginEmail").value.trim();
-        const password = document.getElementById("loginPassword").value;
-        if (!email || !password) {
-          errEl.textContent = "⚠️ كل الحقول مطلوبة";
-          errEl.style.display = "block";
-          return;
-        }
-        try {
-          const res = await fetch(`${API_URL}/auth/login`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ email, password }),
-          });
-          const data = await res.json();
-          if (!res.ok) {
-            errEl.textContent = "⚠️ " + (data.error || "حصل خطأ");
-            errEl.style.display = "block";
-            return;
-          }
-          saveAuth(data.token, data.user);
-          renderNav();
-          closeLogin();
-          showToast("👋 أهلاً " + data.user.name + "!", false);
-        } catch {
-          errEl.textContent = "❌ تعذّر الاتصال";
-          errEl.style.display = "block";
-        }
-      }
-
+      // ============================================
+      // Toast
+      // ============================================
       function showToast(msg, isRed) {
         const t = document.getElementById("toast");
         t.textContent = msg;
         t.className = "toast show" + (isRed ? " red" : "");
-        setTimeout(() => t.classList.remove("show"), 4000);
+        setTimeout(() => t.classList.remove("show"), 4500);
       }
 
       document
@@ -1042,13 +1368,8 @@
           if (e.target === this) closeLogin();
         });
 
-      window.addEventListener("load", () => {
-        const today = new Date().toISOString().split("T")[0];
-        document.getElementById("bookingDate").min = today;
-        document.getElementById("bookingDate").value = today;
-        renderNav();
-        loadFields();
-      });
+      renderNav();
+      loadFields();
     </script>
   </body>
 </html>
